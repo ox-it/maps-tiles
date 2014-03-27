@@ -23,6 +23,7 @@ class tilemill {
 		ensure 	=> directory,
 		owner 	=> $user,
 		group 	=> $user,
+		mode => 775,
 		require => User[$user]
 	}
 

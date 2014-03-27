@@ -15,4 +15,6 @@ class openstreetmap {
         charset => 'SQL_ASCII',
         require => Postgresql::Server::Role[$db_user]
     }
+    
+    package { "osm2pgsql" : ensure => "installed"}
 }

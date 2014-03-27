@@ -17,8 +17,8 @@ package { "git" : ensure => "latest"}
 package { "vim" : ensure => "latest"}
 package { "supervisor" : ensure => "latest"}
 package { "nginx-full" : ensure => "latest"}
-package { ntp: ensure => installed }
-
+package { "ntp" : ensure => installed }
+package { "curl" : ensure => installed }
 
 include tilemill
 include openstreetmap
