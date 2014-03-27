@@ -1,3 +1,5 @@
+Exec { path => '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin',}
+
 # ensure that apt update is run before any packages are installed
 class apt {
   exec { "apt-update":
@@ -19,6 +21,7 @@ package { ntp: ensure => installed }
 
 
 include tilemill
+include openstreetmap
 include nginx
 
 nginx::site { "default":
