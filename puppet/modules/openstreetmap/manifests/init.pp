@@ -4,8 +4,15 @@ class openstreetmap {
 
     include ::postgis
     
+    $db_user = 'tilemill'
+    
+    postgresql::server::role { $db_user :
+          password_hash => false,
+    }
+    
     postgis::database { 'osm' :
-        owner => 'tilemill',
-        require => User['tilemill']
+        owner => $db_user,
+        charset => 'SQL_ASCII',
+        require => Postgresql::Server::Role[$db_user]
     }
 }

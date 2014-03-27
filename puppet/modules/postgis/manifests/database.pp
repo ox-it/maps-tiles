@@ -11,7 +11,10 @@ define postgis::database(
     owner    => $owner,
     encoding => $charset,
     template => 'template_postgis',
-    require  => Exec['create postgis_template'],
+    # TODO fixed external dependency temporarily
+    # as "create postgis_template" is not a valid target??
+    #require  => Exec['create postgis_template'],
+    require => Postgresql::Server::Database['template_postgis'],
   }
 
 }
