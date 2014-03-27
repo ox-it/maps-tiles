@@ -31,7 +31,7 @@ nginx::site { "default":
 $nginx_auth_password = '/srv/tilemill/nginx-auth-passwords'
 
 file { $nginx_auth_password :
-    source  => "puppet:///files/nginx-auth-passwords",
+    content => template('tilemill/nginx-auth-passwords'),
     require => User['tilemill']
 }
 
