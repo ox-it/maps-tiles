@@ -29,6 +29,8 @@ def init():
     """
     run('sudo adduser {user} tilemill'.format(user=env.user), warn_only=True)
     sudo('createuser {user} -S -R -D -l'.format(user=env.user), user='postgres', warn_only=True)
+    sudo('psql {db} -c "ALTER TABLE spatial_ref_sys OWNER TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
+    sudo('psql {db} -c "ALTER TABLE geometry_columns OWNER TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
     sudo('psql -c "GRANT ALL ON DATABASE {db} TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
 
 @task
