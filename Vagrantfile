@@ -13,7 +13,6 @@ Vagrant::Config.run do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "init.pp"
     puppet.module_path = "puppet/modules"
-    puppet.options = ["--templatedir","/vagrant/puppet/files", "--verbose"]
     puppet.facter = {
       "fqdn" => "localhost",
     }
