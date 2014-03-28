@@ -21,6 +21,7 @@ def vm():
     env.key_filename = result.split()[1]
     env.tilemill_home = '/srv/tilemill'
     env.osm_file = 'oxfordshire-latest.osm.pbf'
+    env.osm_db = 'osm'
 
 @task
 def init():
@@ -50,7 +51,8 @@ def download_osm_oxf():
 def populate_osm():
     """Run importer from OSM file
     """
-    run('/usr/bin/osm2pgsql -cGs -d osm -S /usr/local/share/osm2pgsql/default.style {tilemill_home}/{osm_file}'.format(tilemill_home=env.tilemill_home,
-                                                                                                              osm_file=env.osm_file),
-                                                                                                              pty=False)
+    run('imposm -m {tilemill_home}/imposm-mapping.py --connection postgis:///{db} --read --write --optimize --deploy-production-tables --overwrite-cache {tilemill_home}/{osm_file}'.format(db=env.osm_db,
+                                                                                                                        tilemill_home=env.tilemill_home,
+                                                                                                                        osm_file=env.osm_file))
+
 

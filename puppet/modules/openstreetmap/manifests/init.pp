@@ -31,5 +31,11 @@ class openstreetmap {
         require => Postgresql::Server::Role[$db_user]
     }
     
-    package { "osm2pgsql" : ensure => "installed"}
+    package { "imposm" : ensure => "installed"}
+
+    file { "imposm-mapping" :
+        path => "/srv/${db_user}/imposm-mapping.py",
+        content => template("openstreetmap/imposm-mapping.py"),
+        require => User['tilemill'],
+    }
 }
