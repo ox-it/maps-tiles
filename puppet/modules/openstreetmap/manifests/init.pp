@@ -18,23 +18,31 @@ class openstreetmap {
     
     include ::postgis
     
-    $db_user = 'tilemill'
+    $db_user = 'mapbox'
+    $db_name = 'osm'
     
     postgresql::server::role { $db_user :
           password_hash => false,
           require => Exec['utf8 postgres']
     }
     
-    postgis::database { 'osm' :
+    postgis::database { $db_name :
         owner => $db_user,
         charset => 'UTF8',
         require => Postgresql::Server::Role[$db_user]
     }
     
+    postgresql::server::database_grant { 'mapbox_osm':
+        privilege => 'ALL',
+        db        => $db_name,
+        role      => $db_user,
+        require => Postgis::Database[$db_name]
+    }
+    
     package { "imposm" : ensure => "installed"}
 
     file { "imposm-mapping" :
-        path => "/srv/${db_user}/imposm-mapping.py",
+        path => "/srv/tilemill/imposm-mapping.py",
         content => template("openstreetmap/imposm-mapping.py"),
         require => User['tilemill'],
     }
