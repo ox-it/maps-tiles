@@ -6,8 +6,7 @@ Vagrant::Config.run do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
 
   config.vm.forward_port 80, 8088
-  config.vm.forward_port 20008, 20008
-  config.vm.forward_port 20009, 20009
+  config.vm.forward_port 8080, 8080
   config.vm.share_folder "v-app", "/usr/local/app", "./"
 
   config.vm.provision :puppet do |puppet|
@@ -15,5 +14,8 @@ Vagrant::Config.run do |config|
     puppet.manifest_file  = "init.pp"
     puppet.module_path = "puppet/modules"
     puppet.options = ["--templatedir","/vagrant/puppet/files", "--verbose"]
+    puppet.facter = {
+      "fqdn" => "localhost",
+    }
   end
 end

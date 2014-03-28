@@ -1,35 +1,68 @@
+proxy_cache_path /var/lib/nginx/proxy_cache levels=1:2 keys_zone=tilemillui:500m inactive=1200m max_size=500m;
+proxy_temp_path /var/lib/nginx/proxy_temp;
+proxy_connect_timeout 30;
+proxy_read_timeout 120;
+proxy_send_timeout 120;
+
+proxy_cache_key "$scheme$host$request_uri";
+
+upstream tilemill-ui {
+    server 127.0.0.1:20009;
+}
+
 server {
     client_max_body_size 20M;
     server_name <%= fqdn %>;
-    access_log /var/log/nginx/access.log;
-    error_log /var/log/nginx/error.log;
+    listen 80;
+    access_log /var/log/nginx/tilemill-ui.access.log;
+    error_log /var/log/nginx/tilemill-ui.error.log;
+
+    gzip on;
+    gzip_buffers 16 8k;
+    gzip_comp_level 6;
+    gzip_http_version 1.0;
+    gzip_min_length 0;
+    gzip_types text/plain text/css text/javascript application/x-javascript application/javascript application/json image/x-icon
+    gzip_vary on;
+
+    location ^~ /assets/ {
+        # Overrides expires header to 1hr *as seen by the client.*
+        expires 1h;
+        proxy_ignore_headers Cache-Control Expires;
+
+        proxy_cache tilemillui;
+        proxy_cache_use_stale updating;
+        proxy_cache_valid 200 1d;
+        proxy_cache_valid 404 1m;
+        proxy_redirect off;
+
+        proxy_set_header Host $http_host;
+        proxy_pass http://tilemill-ui;
+
+    }
 
     # tilemill
     location / {
-        proxy_set_header Host $http_host;
-        proxy_pass http://127.0.0.1:20009;
         auth_basic "Restricted";
         auth_basic_user_file  <%= nginx_auth_password %>;
-    }
-
-    # Static viewer 
-    location /viewer/ {
-        autoindex on;    
-        alias /usr/local/app/html/;  
-    }
-
-    # Tilestache
-    location /tiles {
-        include uwsgi_params;
-        uwsgi_param SCRIPT_NAME /tiles;
-        uwsgi_pass unix:///var/run/uwsgi/app/tilestache/socket;
-        uwsgi_modifier1 30;
-    }
-    # Testing Tilestache
-    location /test {
-        # run tilestache-server.py /usr/local/app/tilestache/tilestache.cfg and watch it
         proxy_set_header Host $http_host;
-        proxy_pass http://127.0.0.1:8080;
-        rewrite  ^/test/(.*)  /$1 break;
+        proxy_pass http://tilemill-ui;
+    }
+}
+
+upstream tilemill-tiles {
+    server 127.0.0.1:20008;
+}
+
+server {
+    listen 8080;
+    server_name <%= fqdn %>;
+
+    access_log  /var/log/nginx/tilemill-tiles.access.log;
+    error_log /var/log/nginx/tilemill-tiles.error.log;
+
+    location / {
+        proxy_set_header Host $http_host;
+        proxy_pass http://tilemill-tiles;
     }
 }
