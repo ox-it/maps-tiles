@@ -39,6 +39,30 @@ class openstreetmap {
         require => Postgis::Database[$db_name]
     }
     
+    postgresql::server::table_grant { 'osm_spatial_ref_sys':
+        privilege => 'ALL',
+        db        => $db_name,
+        table     => 'spatial_ref_sys',
+        role      => $db_user,
+        require => Postgresql::Server::Database_grant['mapbox_osm']
+    }
+    
+    postgresql::server::table_grant { 'osm_geography_columns':
+        privilege => 'ALL',
+        db        => $db_name,
+        table     => 'geography_columns',
+        role      => $db_user,
+        require => Postgresql::Server::Database_grant['mapbox_osm']
+    }
+    
+    postgresql::server::table_grant { 'osm_geometry_columns':
+        privilege => 'ALL',
+        db        => $db_name,
+        table     => 'geometry_columns',
+        role      => $db_user,
+        require => Postgresql::Server::Database_grant['mapbox_osm']
+    }
+    
     package { "imposm" : ensure => "installed"}
 
     file { "imposm-mapping" :
