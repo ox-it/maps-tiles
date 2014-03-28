@@ -23,10 +23,12 @@ def vm():
     env.osm_file = 'oxfordshire-latest.osm.pbf'
 
 @task
-def vagrant_init():
-    """Permission
+def init():
+    """Initialise permissions for user
     """
-    run('sudo adduser vagrant tilemill')
+    run('sudo adduser {user} tilemill'.format(user=env.user), warn_only=True)
+    sudo('createuser {user} -S -R -D -l'.format(user=env.user), user='postgres', warn_only=True)
+    sudo('psql -c "GRANT ALL ON DATABASE {db} TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
 
 @task
 def server():
