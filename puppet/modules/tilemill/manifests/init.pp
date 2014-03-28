@@ -3,6 +3,8 @@ class tilemill {
 
     $user = 'tilemill'
     $user_directory = "/srv/${user}"
+    $git_repo = 'https://github.com/ox-it/maps-tiles.git'
+    $mapbox_project = '/usr/share/mapbox/project/maps-ox'
 
     exec { "add-apt" :
       command => "/usr/bin/add-apt-repository -y ppa:developmentseed/mapbox && /usr/bin/apt-get update",
@@ -45,4 +47,19 @@ class tilemill {
         enable => true,
         require => File["tilemill.config"],
     }
+    
+    exec { "git-clone-project" :
+        command => "git clone ${git_repo} ${user_directory}/maps-tiles",
+        user => 'tilemill',
+        unless => "test -d ${user_directory}/maps-tiles",
+        require => [File[$user_directory], Package['git']]
+    }
+    
+    exec { "copy-to-mapbox" :
+        command => "cp -R ${user_directory}/maps-tiles/maps-ox/ /usr/share/mapbox/project/maps-ox",
+        user => 'mapbox',
+        unless => "test -d /usr/share/mapbox/project/maps-ox",
+        require => [Service['tilemill'], Exec['git-clone-project']]
+    }
+
 }
