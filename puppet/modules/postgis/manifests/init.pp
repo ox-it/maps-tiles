@@ -67,10 +67,12 @@ class postgis (
 
   Class['postgresql::server']
   ->
-  package { $packages:
-    ensure => 'present',
-  }
-  ->
+  # TODO for some reasons this is causing issues with puppet 2.7.11
+  # Could not find 
+  #package { $packages:
+  #  ensure => 'present',
+  #}
+  #->
   postgresql::server::database { 'template_postgis':
     istemplate => true,
     template   => 'template1',
