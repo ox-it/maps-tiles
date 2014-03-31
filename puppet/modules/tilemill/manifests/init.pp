@@ -76,6 +76,13 @@ class tilemill {
         require => Exec['git-clone-project'],
     }
     
+    file { '/usr/share/mapbox/project/maps-ox' :
+        ensure => directory,
+        mode => 0764,
+        recurse => true,
+        require => Service['tilemill']
+    }
+    
     exec { "copy-to-mapbox" :
         command => "cp -R ${maps_project_dir}/maps-ox/ /usr/share/mapbox/project/maps-ox",
         user => 'mapbox',
@@ -83,11 +90,20 @@ class tilemill {
         require => [Service['tilemill'], Exec['git-clone-project']]
     }
 
+    file { "${user_directory}/mapbox" :
+        ensure => directory,
+        owner => tilemill,
+        group => mapbox,
+        mode => 0774,
+        recurse => true,
+        require => File[$user_directory]
+    }
+
     exec { "copy-land" :
-        command => "curl http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip > ${user_directory}/10m-land.zip",
+        command => "curl http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip > ${user_directory}/mapbox/10m-land.zip",
         user => 'tilemill',
-        unless => "test -f ${user_directory}/10m-land.zip",
-        require => File[$user_directory],
+        unless => "test -f ${user_directory}/mapbox/10m-land.zip",
+        require => File["${user_directory}/mapbox"],
     }
 
 }
