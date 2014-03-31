@@ -19,6 +19,7 @@ package { "supervisor" : ensure => "latest"}
 package { "nginx-full" : ensure => "latest"}
 package { "ntp" : ensure => installed }
 package { "curl" : ensure => installed }
+package { "ntp" : ensure => installed }
 
 include tilemill
 include openstreetmap
