@@ -19,6 +19,7 @@ Remote server
 
 TileMill UI is served on port 80, tiles are served on port 8080.
 
+To run Fabric commands you need to set up two environment variables: `MAPS_HOST` (hostname of the server to SSH) and `MAPS_USER` (your user name on the server). 
 
 
 Authentication for TileMill web interface

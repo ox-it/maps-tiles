@@ -24,6 +24,19 @@ def vm():
     env.osm_db = 'osm'
 
 @task
+def server():
+     """Configuration for remote server
+     """
+     host = os.getenv('MAPS_HOST')
+     env.hosts = ['{name}:22'.format(name=host)]
+     env.user = os.getenv('MAPS_USER')
+     env.tilemill_home = '/srv/tilemill'
+     env.osm_file = 'oxfordshire-latest.osm.pbf'
+     env.osm_db = 'osm'
+
+# commands to prepare server
+
+@task
 def init():
     """Initialise permissions for user
     """
@@ -33,12 +46,7 @@ def init():
     sudo('psql {db} -c "GRANT ALL ON geography_columns TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
     sudo('psql {db} -c "GRANT ALL ON geometry_columns TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
     sudo('psql -c "GRANT ALL ON DATABASE {db} TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
-
-@task
-def server():
-     """Configuration for remote server
-     """
-     pass
+     
      
 # commands
 
