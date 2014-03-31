@@ -15,6 +15,11 @@ class tilemill {
     package { "tilemill" : ensure => "latest", subscribe => Exec['add-apt'] }
     package { "nodejs" : ensure => "latest", subscribe => Exec['add-apt'] }
 
+    # installing a few fonts
+    package { ["fonts-cantarell", "lmodern", "ttf-aenigma", "ttf-georgewilliams", "ttf-bitstream-vera", "ttf-sjfonts", "ttf-tuffy", "tv-fonts", "ubuntustudio-font-meta"] :
+        ensure => installed
+    }
+
 	user { $user :
 		home => $user_directory,
 		ensure => present,
