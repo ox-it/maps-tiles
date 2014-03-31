@@ -39,7 +39,7 @@ class openstreetmap {
         require => Postgis::Database[$db_name]
     }
     
-    postgresql_psql { "GRANT SELECT ON ALL TABLES IN SCHEMA ${db_name} to ${db_user}" :
+    postgresql_psql { "GRANT SELECT ON ALL TABLES IN SCHEMA public to ${db_user}" :
       db         => $db_name,
       psql_user  => $postgresql::server::user,
       psql_group => $postgresql::server::group,
