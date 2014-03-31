@@ -1,4 +1,4 @@
-@oxfordblue: #002147;
+@oxfordblue: #3E6e8D;
 @font: @sans_lt;
 @value: [short_name];
 
@@ -9,12 +9,13 @@
     [type_name = "Department"],
     [type_name = "Museum"] {
       ::polygon {
-          polygon-opacity: 0.15;
+          polygon-opacity: 0.3;
           polygon-fill: @oxfordblue;
       }
       ::outline {
-        line-color: lighten(@oxfordblue, 10);
+        line-color: @oxfordblue;
         line-width: 1;
+        line-opacity: 0.3;
         }
 	}
   }
@@ -32,8 +33,8 @@
         text-name: @value;
         text-fill: @oxfordblue;
         text-size: 12;
-        text-halo-fill: lighten(white, 10);
-        text-halo-radius: 1.5;
+        text-halo-fill: lighten(white, 5);
+        text-halo-radius: 1;
         text-placement: point;
         text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
         text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";

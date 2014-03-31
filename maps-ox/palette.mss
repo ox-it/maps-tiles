@@ -49,7 +49,7 @@ Map {
 @wooded:            #C3D9AD;
 @agriculture:       #F2E8B6;
 
-@building:          #E6E0D0;
+@building:          #D6D0C0;
 @hospital:          rgb(229,198,195);
 @school:            #FFF5CC;
 @sports:            #B8E6B8;
@@ -118,7 +118,7 @@ Map {
 
 /* We set up a default halo color for places so you can edit them all
    at once or override each individually. */
-@place_halo:        fadeout(#fff,34%);
+@place_halo:        fadeout(#fff,20%);
 
 @country_text:      #435;
 @country_halo:      @place_halo;
