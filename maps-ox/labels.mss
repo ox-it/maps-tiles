@@ -31,7 +31,7 @@
     text-wrap-width: 50;
   }
   [zoom>4] {
-    text-halo-radius: 2;
+    text-halo-radius: 1;
   }
   [zoom=5] {
     text-size:11 + @text_adjust;
@@ -271,7 +271,7 @@
   [zoom>=17][area>5000],
   [zoom>=18][area>=0] {
     text-name: "[name]";
-    text-halo-radius: 1.5;
+    text-halo-radius: 1;
     text-face-name:@sans;
     text-size: 11;
     text-wrap-width:30;

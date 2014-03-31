@@ -1,3 +1,4 @@
 .vagrant/
 *.pyc
+maps-ox/layers/*
 
