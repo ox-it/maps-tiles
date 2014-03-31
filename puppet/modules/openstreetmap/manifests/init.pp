@@ -1,8 +1,14 @@
 class openstreetmap {
 
+    $packages = ['postgresql-9.1-postgis', 'postgis']
+    package { $packages :
+        ensure => "installed"
+    }
+
     class { 'postgresql::globals' :
       encoding => 'UTF8',
       locale   => 'en_GB.UTF-8',
+      require => Package[$packages]
     }->
     class { 'postgresql::server' :
         encoding => 'UTF8'
