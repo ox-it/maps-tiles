@@ -67,4 +67,11 @@ class tilemill {
         require => [Service['tilemill'], Exec['git-clone-project']]
     }
 
+    exec { "copy-land" :
+        command => "curl http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip > ${user_directory}/10m-land.zip",
+        user => 'tilemill',
+        unless => "test -f ${user_directory}/10m-land.zip",
+        require => File[$user_directory],
+    }
+
 }
