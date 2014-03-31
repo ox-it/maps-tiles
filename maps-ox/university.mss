@@ -1,5 +1,5 @@
 @oxfordblue: #002147;
-@font: "Helvetica Neue Bold";
+@font: @sans_lt;
 @value: [short_name];
 
 #university-shapes {
