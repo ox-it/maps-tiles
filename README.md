@@ -64,3 +64,11 @@ Note on future work
 -------------------
 
 It could be interesting to provide a tiles server (such as Tilestache?).
+
+
+Similar projects
+----------------
+
+Here's a list of similar projects to run TileMill on a server:
+ * https://github.com/perrygeo/vagrant-webmaps
+ * https://github.com/miccolis/aws-tilemill
