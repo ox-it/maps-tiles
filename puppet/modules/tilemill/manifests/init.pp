@@ -96,7 +96,7 @@ class tilemill {
         group => mapbox,
         mode => 0774,
         recurse => true,
-        require => File[$user_directory]
+        require => [File[$user_directory], Service['tilemill']]
     }
 
     exec { "copy-land" :
