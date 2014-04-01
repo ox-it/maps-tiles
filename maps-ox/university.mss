@@ -1,4 +1,5 @@
-@oxfordblue: #3E6e8D;
+@oxfordblue: #002147;
+@oxfordlightblue: #3E6e8D;
 @font: @sans_lt;
 @value: [short_name];
 
@@ -9,8 +10,8 @@
     [type_name = "Department"],
     [type_name = "Museum"] {
       ::polygon {
-          polygon-opacity: 0.3;
-          polygon-fill: @oxfordblue;
+          polygon-opacity: 0.4;
+          polygon-fill: @oxfordlightblue;
       }
       ::outline {
         line-color: @oxfordblue;

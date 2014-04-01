@@ -63,6 +63,7 @@
 /* ---- BUILDINGS ---- */
 #buildings[zoom>=12][zoom<=16] {
   polygon-fill:@building;
+  polygon-opacity: 0.3;
   [zoom>=14] {
     line-color:darken(@building,5%);
     line-width:0.2;
@@ -77,11 +78,13 @@
 // so we use a separate layer that does this for us.
 #buildings[zoom>=17][type != 'hedge'] {
   building-fill:@building;
+  polygon-opacity: 0.3;
   building-height:1.25;
 }
 
 #buildings[zoom>=17][type = 'hedge'] {
   building-fill:@wooded;
+  polygon-opacity: 0.3;
   building-height:1.25;
 }
 
