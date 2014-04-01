@@ -1,4 +1,5 @@
 .vagrant/
 *.pyc
 maps-ox/layers/*
+maps-ox/.thumb.png
 

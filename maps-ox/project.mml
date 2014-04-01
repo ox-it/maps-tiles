@@ -25,20 +25,27 @@
   "Layer": [
     {
       "Datasource": {
-        "dbname": "osm", 
-        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34", 
-        "file": "/srv/tilemill/mapbox/10m-land.zip", 
-        "id": "land", 
-        "project": "foss4g-2011", 
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
+        "dbname": "osm",
+        "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34",
+        "file": "/srv/tilemill/mapbox/10m-land.zip",
+        "id": "land",
+        "project": "foss4g-2011",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
         "type": "shape"
-      }, 
-      "class": "", 
-      "geometry": "polygon", 
-      "id": "land", 
-      "name": "land", 
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over", 
-      "status": "on"
+      },
+      "class": "shp",
+      "geometry": "polygon",
+      "id": "land",
+      "name": "land",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "extent": [
+        -179.99998938710385,
+        -85.051,
+        180,
+        83.63410065282292
+      ],
+      "srs-name": "900913",
+      "advanced": {}
     },
     {
       "geometry": "polygon",
@@ -48,7 +55,7 @@
         39.8558813,
         51.81965
       ],
-      "id": "university-shapes",
+      "id": "landuse_gen0",
       "class": "",
       "Datasource": {
         "dbname": "osm",
@@ -61,9 +68,6 @@
         "table": "( SELECT geometry, type, area\n  FROM osm_landusages_gen0\n  ORDER BY area DESC\n) AS data",
         "type": "postgis"
       },
-      "class": "",
-      "geometry": "polygon",
-      "id": "landuse_gen0",
       "name": "landuse_gen0",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
@@ -127,7 +131,7 @@
       "name": "waterway_low",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
-      "status": "on"
+      "status": "off"
     },
     {
       "Datasource": {
@@ -143,7 +147,8 @@
       "id": "waterway_med",
       "name": "waterway_med",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "status": "off"
     },
     {
       "Datasource": {
@@ -178,8 +183,7 @@
       "id": "water_gen0",
       "name": "water_gen0",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -198,8 +202,7 @@
       "id": "water_gen1",
       "name": "water_gen1",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -218,8 +221,7 @@
       "id": "water",
       "name": "water",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -254,6 +256,24 @@
       "id": "admin",
       "name": "admin",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.7302701,
+        -3.6296592,
+        39.8558813,
+        51.81965
+      ],
+      "id": "university-shapes",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-shapes.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-shapes"
     },
     {
       "Datasource": {
@@ -467,24 +487,6 @@
       "status": "on"
     },
     {
-      "geometry": "polygon",
-      "extent": [
-        -1.7302701,
-        -3.6296592,
-        39.8558813,
-        51.81965
-      ],
-      "id": "university-shapes",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-shapes.json"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-shapes"
-    },
-    {
       "Datasource": {
         "dbname": "osm",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
@@ -523,24 +525,6 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
       "status": "on"
-    },
-    {
-      "geometry": "point",
-      "extent": [
-        -1.37443,
-        -3.6296592,
-        39.8558813,
-        51.81965
-      ],
-      "id": "university-labels",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university.json"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-labels"
     },
     {
       "Datasource": {
@@ -601,6 +585,24 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
       "status": "on"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        -1.37443,
+        -3.6296592,
+        39.8558813,
+        51.81965
+      ],
+      "id": "university-labels",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-labels"
     },
     {
       "geometry": "polygon",

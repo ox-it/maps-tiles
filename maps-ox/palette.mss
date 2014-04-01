@@ -49,7 +49,7 @@ Map {
 @wooded:            #C3D9AD;
 @agriculture:       #F2E8B6;
 
-@building:          #D6D0C0;
+@building:          #B3975C;
 @hospital:          rgb(229,198,195);
 @school:            #FFF5CC;
 @sports:            #B8E6B8;
