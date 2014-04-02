@@ -40,19 +40,19 @@ Map {
 /* LANDUSE & LANDCOVER COLORS
 /* ================================================================== */
 
-@land:              #FCFBE7;
-@water:             #C4DFF6;
-@grass:             #E6F2C1;
-@beach:             #FFEEC7;
-@park:              #DAF2C1;
-@cemetery:          #D6DED2;
-@wooded:            #C3D9AD;
-@agriculture:       #F2E8B6;
+@land:              desaturate(#FCFBE7, 30%);
+@water:             desaturate(#C4DFF6, 30%);
+@grass:             desaturate(#E6F2C1, 30%);
+@beach:             desaturate(#FFEEC7, 30%);
+@park:              desaturate(#DAF2C1, 30%);
+@cemetery:          desaturate(#D6DED2, 30%);
+@wooded:            desaturate(#C3D9AD, 10%);
+@agriculture:       desaturate(#F2E8B6, 30%);
 
 @building:          #B3975C;
-@hospital:          rgb(229,198,195);
-@school:            #FFF5CC;
-@sports:            #B8E6B8;
+@hospital:          desaturate(rgb(229,198,195), 30%);
+@school:            desaturate(#FFF5CC, 30%);
+@sports:            desaturate(#B8E6B8, 30%);
 
 @residential:       @land * 0.98;
 @commercial:        @land * 0.97;
@@ -118,7 +118,7 @@ Map {
 
 /* We set up a default halo color for places so you can edit them all
    at once or override each individually. */
-@place_halo:        fadeout(#fff,20%);
+@place_halo:        fadeout(#fff,34%);
 
 @country_text:      #435;
 @country_halo:      @place_halo;
@@ -149,5 +149,11 @@ Map {
 
 /* ****************************************************************** */
 
+/* ================================================================== */
+/* OXFORD COLORS
+/* ================================================================== */
 
+@oxfordblue: #002147;
+@oxfordlightblue: #04508f;
+@oxfordgold: #B3975C;
 
