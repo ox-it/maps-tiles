@@ -96,14 +96,37 @@ class tilemill {
         group => mapbox,
         mode => 0774,
         recurse => true,
-        require => File[$user_directory]
+        require => [File[$user_directory], Service['tilemill']]
     }
 
-    exec { "copy-land" :
-        command => "curl http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip > ${user_directory}/mapbox/10m-land.zip",
-        user => 'tilemill',
-        unless => "test -f ${user_directory}/mapbox/10m-land.zip",
-        require => File["${user_directory}/mapbox"],
+    # download a file (HTTP download)
+    define download($url = $title, $file, $user = 'tilemill', $group = 'mapbox', $mode = 0774) {
+          exec { "copy-${title}" :
+              command => "curl ${url} > ${file}",
+              user => $user,
+              unless => "test -f ${file}",
+          }
+          file { $file :
+              owner => $user,
+              group => $group,
+              mode => $mode,
+              require => Exec["copy-${title}"]
+          }
+    }
+
+    download { "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip" :
+        file => "${user_directory}/mapbox/10m-land.zip",
+        require => File["${user_directory}/mapbox"]
+    }
+
+    download { "http://tilemill-data.s3.amazonaws.com/osm/coastline-good.zip" :
+        file => "${user_directory}/mapbox/coastline-good.zip",
+        require => File["${user_directory}/mapbox"]
+    }
+    
+    download { "http://tilemill-data.s3.amazonaws.com/osm/shoreline_300.zip" :
+        file => "${user_directory}/mapbox/shoreline_300.zip",
+        require => File["${user_directory}/mapbox"]
     }
 
 }

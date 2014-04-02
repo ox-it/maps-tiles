@@ -37,3 +37,38 @@ You need `fabric` to run commands on the server (using a virtualenv, it is recom
 You should run:
  * `fab server download_osm_oxf` to download the latest dump from OpenStreetMap for Oxfordshire
  * `fab server populate_osm` to feed PostGIS with the latest dump from OpenStreetMap
+
+
+Initial setup for an user
+-------------------------
+
+Once logged-in to the server, you should add your .gitconfig to the root of your user directory.
+
+
+Workflow for working with 
+-------------------------
+
+After having done some changes, you should run `fab server tilemill_to_git` to copy the project files from the workspace (TileMill) to the git repository.
+
+Using SSH, do `cd /srv/tilemill/maps-tiles` to navigate to the git repository; you can now use all the git commands (i.e. `commit`, `branch` etc)
+
+
+Note on git / github using HTTPS
+--------------------------------
+
+You will notice fairly quickly that you will need to enter your username/password quite often when doing `git push` and `git pull`, that is because
+we are using HTTPS, various techniques exist to reduce this issue: https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github
+
+
+Note on future work
+-------------------
+
+It could be interesting to provide a tiles server (such as Tilestache?).
+
+
+Similar projects
+----------------
+
+Here's a list of similar projects to run TileMill on a server:
+ * https://github.com/perrygeo/vagrant-webmaps
+ * https://github.com/miccolis/aws-tilemill
