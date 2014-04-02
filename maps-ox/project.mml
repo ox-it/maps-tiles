@@ -50,6 +50,42 @@
     {
       "geometry": "polygon",
       "extent": [
+        -179.99999692067183,
+        -85.051,
+        179.99999692067183,
+        83.66933299999998
+      ],
+      "id": "processed_p",
+      "class": "shp",
+      "Datasource": {
+        "file": "/srv/tilemill/mapbox/coastline-good.zip"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "processed_p"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -179.99999692067183,
+        -85.051,
+        179.99999692067183,
+        83.66933299999998
+      ],
+      "id": "shoreline_300",
+      "class": "shp",
+      "Datasource": {
+        "file": "/srv/tilemill/mapbox/shoreline_300.zip"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "shoreline_300"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
         -1.7302701,
         -3.6296592,
         39.8558813,
@@ -70,8 +106,7 @@
       },
       "name": "landuse_gen0",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -90,8 +125,7 @@
       "id": "landuse_gen1",
       "name": "landuse_gen1",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -110,8 +144,7 @@
       "id": "landuse",
       "name": "landuse",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -130,8 +163,7 @@
       "id": "waterway_low",
       "name": "waterway_low",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "off"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -147,8 +179,7 @@
       "id": "waterway_med",
       "name": "waterway_med",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "off"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -258,40 +289,6 @@
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
     },
     {
-      "geometry": "polygon",
-      "extent": [
-        -1.7302701,
-        -3.6296592,
-        39.8558813,
-        51.81965
-      ],
-      "id": "university-shapes",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-shapes.json"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-shapes"
-    },
-    {
-      "Datasource": {
-        "dbname": "osm",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "geometry_field": "geometry",
-        "key_field": "",
-        "table": "( SELECT geometry, type, name, area\n    FROM osm_buildings\n  ORDER BY ST_YMin(ST_Envelope(geometry)) DESC\n) AS data",
-        "type": "postgis"
-      },
-      "class": "",
-      "geometry": "polygon",
-      "id": "buildings",
-      "name": "buildings",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
-    },
-    {
       "Datasource": {
         "dbname": "osm",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
@@ -308,8 +305,7 @@
       "id": "aeroway",
       "name": "aeroway",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -392,8 +388,7 @@
       "id": "roads_low",
       "name": "roads_low",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -428,8 +423,7 @@
       "id": "bridge",
       "name": "bridge",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -483,8 +477,62 @@
       "id": "place",
       "name": "place",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
+      "srs-name": "900913"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.309241,
+        51.7513682,
+        -1.2134294,
+        51.81965
+      ],
+      "id": "curated-shapes",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "curated-shapes"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.7302701,
+        -3.6296592,
+        39.8558813,
+        51.81965
+      ],
+      "id": "university-shapes",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-shapes.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-shapes"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "geometry",
+        "key_field": "",
+        "table": "( SELECT geometry, type, name, area\n    FROM osm_buildings\n  ORDER BY ST_YMin(ST_Envelope(geometry)) DESC\n) AS data",
+        "type": "postgis",
+        "id": "buildings",
+        "project": "maps-ox",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "class": "",
+      "geometry": "polygon",
+      "id": "buildings",
+      "name": "buildings",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
     },
     {
       "Datasource": {
@@ -612,28 +660,13 @@
         -1.2134294,
         51.81965
       ],
-      "id": "curated-shapes",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "curated-shapes"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -1.309241,
-        51.7513682,
-        -1.2134294,
-        51.81965
-      ],
       "id": "curated-labels",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json"
+        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json",
+        "id": "curated-labels",
+        "project": "maps-ox",
+        "srs": ""
       },
       "srs-name": "autodetect",
       "srs": "",
