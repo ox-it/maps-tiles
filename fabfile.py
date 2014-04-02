@@ -66,4 +66,15 @@ def populate_osm():
                                                                                                                         tilemill_home=env.tilemill_home,
                                                                                                                         osm_file=env.osm_file))
 
+@task
+def tilemill_to_git():
+    """Copy project files to the git repository
+    """
+    run('cp -R /usr/share/mapbox/project/maps-ox /srv/tilemill/maps-tiles/')
 
+
+@task
+def git_to_tilemill():
+    """Copy files from the git repo to tilemill
+    """
+    run('cp -R /srv/tilemill/maps-tiles/maps-ox/ /usr/share/mapbox/project/')
