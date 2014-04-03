@@ -7,9 +7,7 @@ def simplify(features):
     shapes = dict()
     for feature in features['features']:
         coord = feature['geometry']['coordinates']
-        feat_type = feature['properties']['type_name']
-        key = '{type_name}-{coords}'.format(type_name=feat_type,
-                                            coords=str(coord))
+        key = '{coords}'.format(coords=str(coord))
         shapes[key] = feature
     return shapes
 
