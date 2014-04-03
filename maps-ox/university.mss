@@ -2,47 +2,36 @@
 @value: [short_name];
 
 #university-shapes {
-  [type_name = "College"],
-  [type_name = "Hall"],
-  [type_name = "Department"],
-  [type_name = "Museum"] {
+  ::polygon {
+      polygon-opacity:0.1;
+      polygon-fill:@oxfordlightblue;
+  }
+  ::outline {
+    line-color: @oxfordblue;
+    line-width: 1;
+    line-opacity: 0.12;
+  }
+  [zoom>=16] {
     ::polygon {
-        polygon-opacity:0.1;
-        polygon-fill:@oxfordlightblue;
+      polygon-opacity: 0.17;
     }
     ::outline {
-      line-color: @oxfordblue;
-      line-width: 1;
-      line-opacity: 0.12;
+      line-opacity: 0.1;
     }
-      
-  
-    [zoom>=16] {
-      ::polygon {
-        polygon-opacity: 0.17;
-      }
-      ::outline {
-        line-opacity: 0.1;
-      }
-    }
-    [zoom>=18] {
-      ::polygon {
-        polygon-opacity: 0.2;
-      }
-      ::outline {
-        line-opacity: 0.1;
-        }
-     }
   }
+  [zoom>=18] {
+    ::polygon {
+      polygon-opacity: 0.2;
+    }
+    ::outline {
+      line-opacity: 0.1;
+      }
+   }
 }
 
 #university-labels {
-  // only display university labels at zoom 15
+  // only display university labels btween zoom 15 and 18
   [zoom>15][zoom<18] {
-    [type_name = "College"],
-    [type_name = "Department"],
-    [type_name = "Hall"],
-    [type_name = "Museum"] {
       ::labels {
         text-face-name: @font;
         text-name: @value;
@@ -58,11 +47,10 @@
         text-min-distance: 2;
       }
     }
-  }
 }
 
 #curated-shapes {
-  [zoom<=20] {
+  [zoom<=17] {
    ::outline {
       line-color: @oxfordblue;
       line-width: 1;
@@ -70,7 +58,7 @@
       line-join: round;
 	}
 	::shape {
-        polygon-opacity: 0.4;
+        polygon-opacity: 0.2;
         polygon-fill: desaturate(@oxfordlightblue, 30%);
   	}
   }
