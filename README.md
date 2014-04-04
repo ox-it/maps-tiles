@@ -66,6 +66,14 @@ Note on future work
 It could be interesting to provide a tiles server (such as Tilestache?).
 
 
+Deploying tiles
+---------------
+
+Deploying the tiles to a server is done by running: `fab tiles deploy_tiles:/local/path/to.mbtiles`
+
+It expects en environment variable `TILES_HOST` containing `host:port`, your public SSH key should have been deployed to `/srv/tiles/.ssh/authorized_keys` first.
+
+
 Similar projects
 ----------------
 

@@ -5,6 +5,7 @@ from fabric.api import *
 from fabric.contrib import *
 from fabric.contrib.files import exists, sed
 from fabric import utils
+from fabric.operations import put
 
 OSM_DOWNLOAD = 'http://download.geofabrik.de/europe/great-britain/england/oxfordshire-latest.osm.pbf'
 
@@ -33,6 +34,17 @@ def server():
      env.tilemill_home = '/srv/tilemill'
      env.osm_file = 'oxfordshire-latest.osm.pbf'
      env.osm_db = 'osm'
+
+@task
+def tiles():
+    """Configuration for tiles server
+    """
+    host = os.getenv('TILES_HOST')      # should be hostname:port
+    env.hosts = [host]
+    env.user = 'tiles'
+    env.home = '/srv/tiles'
+    env.deploy_path = '/srv/tiles/www'
+
 
 # commands to prepare server
 
@@ -78,3 +90,18 @@ def git_to_tilemill():
     """Copy files from the git repo to tilemill
     """
     run('cp -R /srv/tilemill/maps-tiles/maps-ox/ /usr/share/mapbox/project/')
+    
+
+# tiles
+
+@task
+def deploy_tiles(local_file):
+    """Deploy tiles from a file to the web server
+    :param local_file: local mbtiles file to push to the server
+    """
+    remote_file = '/srv/tiles/tiles.mbtiles'
+    put(local_path=local_file, remote_path=remote_file)
+    versioned_path = '/srv/%s/tiles-%s' % (env.user, datetime.now().strftime('%Y%m%d%H%M'))
+    run('mb-util {file} {path}'.format(file=remote_file, path=versioned_path))
+    run('rm -f {path}'.format(path=env.deploy_path))
+    run('ln -s %s %s' % (versioned_path, env.deploy_path))
