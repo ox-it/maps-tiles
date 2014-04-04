@@ -6,13 +6,13 @@
     52.1006
   ],
   "center": [
-    -1.2586,
-    51.7517,
-    9
+    -1.2583,
+    51.754,
+    12
   ],
   "format": "png",
   "interactivity": false,
-  "minzoom": 8,
+  "minzoom": 12,
   "maxzoom": 20,
   "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
   "Stylesheet": [
@@ -278,9 +278,10 @@
         "geometry_field": "",
         "id": "admin",
         "key_field": "",
-        "project": "osm-bright-imposm",
+        "project": "maps-ox",
         "table": "osm_admin",
-        "type": "postgis"
+        "type": "postgis",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
       },
       "class": "",
       "geometry": "polygon",
@@ -461,25 +462,6 @@
       "srs-name": "900913"
     },
     {
-      "Datasource": {
-        "dbname": "osm",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "geometry_field": "geometry",
-        "id": "place",
-        "key_field": "",
-        "project": "maps-ox",
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-        "table": "( SELECT geometry, type, name, z_order, population\n  FROM osm_places\n  ORDER BY z_order, population DESC NULLS LAST\n) AS data",
-        "type": "postgis"
-      },
-      "class": "",
-      "geometry": "point",
-      "id": "place",
-      "name": "place",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
-    },
-    {
       "geometry": "polygon",
       "extent": [
         -1.309241,
@@ -534,6 +516,25 @@
       "geometry": "polygon",
       "id": "buildings",
       "name": "buildings",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "geometry",
+        "id": "place",
+        "key_field": "",
+        "project": "maps-ox",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT geometry, type, name, z_order, population\n  FROM osm_places\n  ORDER BY z_order, population DESC NULLS LAST\n) AS data",
+        "type": "postgis"
+      },
+      "class": "",
+      "geometry": "point",
+      "id": "place",
+      "name": "place",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913"
     },
@@ -678,7 +679,7 @@
     }
   ],
   "scale": 1,
-  "metatile": 4,
+  "metatile": 6,
   "attribution": "Data © OpenStreetMap (and) contributors, CC-BY-SA",
   "description": "",
   "name": "maps.ox"
