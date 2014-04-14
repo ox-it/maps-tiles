@@ -1,33 +1,55 @@
 @font: @sans_lt;
 @value: [short_name];
 
-#university-shapes {
-  ::polygon {
-      polygon-opacity:0.1;
-      polygon-fill:@oxfordlightblue;
-  }
-  ::outline {
-    line-color: @oxfordblue;
-    line-width: 1;
-    line-opacity: 0.12;
-  }
-  [zoom>=16] {
-    ::polygon {
-      polygon-opacity: 0.17;
-    }
+// colleges, halls and sites
+#university-colleges {
     ::outline {
-      line-opacity: 0.1;
-    }
-  }
-  [zoom>=18] {
-    ::polygon {
-      polygon-opacity: 0.2;
-    }
-    ::outline {
-      line-opacity: 0.1;
-      }
-   }
+      line-color: red;
+      line-width: 1;
+    }  
 }
+
+// departments, museums and libraries
+#university-departments {
+    ::outline {
+      line-color: green;
+      line-width: 1;
+    }    
+}
+
+// buildings
+#university-buildings {
+  [type_name='Site'],
+  [type_name='College'],
+  [zoom<17] 
+  {
+    ::polygon {
+        polygon-opacity:0.12;
+        polygon-fill:@oxfordlightblue;
+    }
+    ::outline {
+      line-color: @oxfordblue;
+      line-width: 1;
+      line-opacity: 0.12;
+    }
+  }
+  [type_name='Building'],
+  [type_name='Library'],
+  [type_name='Hall'],
+  [type_name='Museum']
+  {
+    ::polygon {
+        polygon-opacity:1;
+        polygon-fill:@oxfordlightblue;
+    }
+    ::outline {
+      line-color: @oxfordblue;
+      line-width: 1;
+      line-opacity: 0.5;
+    }
+  }
+}
+
 
 #university-labels {
   // only display university labels btween zoom 15 and 18
@@ -38,7 +60,7 @@
         text-fill: @oxfordblue;
         text-size: 10;
         text-halo-fill: fadeout(white, 40%);
-        text-halo-radius: 1.5;
+        text-halo-radius: 1;
         text-placement: point;
         text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
         text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";
@@ -50,7 +72,7 @@
 }
 
 #curated-shapes {
-  [zoom<=17] {
+  [zoom<=16] {
    ::outline {
       line-color: @oxfordblue;
       line-width: 1;

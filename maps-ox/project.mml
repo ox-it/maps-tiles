@@ -6,9 +6,9 @@
     52.1006
   ],
   "center": [
-    -1.2583,
-    51.754,
-    12
+    -1.2398,
+    51.7641,
+    13
   ],
   "format": "png",
   "interactivity": false,
@@ -472,7 +472,10 @@
       "id": "curated-shapes",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json"
+        "file": "/srv/tilemill/maps-tiles/data/curated_sites.json",
+        "id": "curated-shapes",
+        "project": "maps-ox",
+        "srs": ""
       },
       "srs-name": "autodetect",
       "srs": "",
@@ -483,14 +486,14 @@
       "geometry": "polygon",
       "extent": [
         -1.7302701,
-        -3.6296592,
-        39.8558813,
-        51.81965
+        51.5805917,
+        -1.199,
+        51.8189031
       ],
-      "id": "university-shapes",
+      "id": "university-buildings",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-shapes.json",
+        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
         "id": "university-shapes",
         "project": "maps-ox",
         "srs": ""
@@ -498,7 +501,7 @@
       "srs-name": "autodetect",
       "srs": "",
       "advanced": {},
-      "name": "university-shapes"
+      "name": "university-buildings"
     },
     {
       "Datasource": {
@@ -676,9 +679,45 @@
       "srs": "",
       "advanced": {},
       "name": "curated-labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.2704257,
+        -3.6296592,
+        39.8558813,
+        51.7754
+      ],
+      "id": "university-colleges",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-colleges-halls-sites.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-colleges"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.37443,
+        51.6851,
+        -1.2062214,
+        51.81965
+      ],
+      "id": "university-departments",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-departments-museums-library.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-departments"
     }
   ],
-  "scale": 1,
+  "scale": 2,
   "metatile": 6,
   "attribution": "Data © OpenStreetMap (and) contributors, CC-BY-SA",
   "description": "",
