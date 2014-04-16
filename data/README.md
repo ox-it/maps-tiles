@@ -4,6 +4,13 @@ Maps.ox data
 All university data
 -------------------
 
+Get the data from OxPoints:
+
+    curl "https://data.ox.ac.uk/graph/oxpoints/data" -L -H "Accept: text/turtle" > oxpoints.rdf
+
+    curl "https://data.ox.ac.uk/graph/oxpoints-extents/data" -L -H "Accept: text/turtle" > shapes.rdf
+
+
 We are getting a GeoJSON feed from Mobile Oxford, the URL is as follow:
 
     http://127.0.0.1:5000/places/search.geojson?type_exact=/university/college&type_exact=/university/hall&type_exact=/university/department&type_exact=/university/building&type_exact=/university/library&type_exact=/university/site&type_exact=/leisure/museum&count=5000
