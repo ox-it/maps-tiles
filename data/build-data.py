@@ -14,6 +14,14 @@ Geometry = Namespace('http://data.ordnancesurvey.co.uk/ontology/geometry/')
 Geo = Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
 
 def _get_feature(ident, full_name, short_name, type_name, geometry):
+    """Prepare a GeoJSON feature
+    :param ident: URI of the Thing
+    :param full_name: long version of the name
+    :param short_name: short version of the name (will fallback on full_name)
+    :param type_name: name of the type
+    :param geometry: geometry (shapely)
+    :return geojson.Feature
+    """
     oxpoints_id = 'oxpoints:{ident}'.format(ident=ident.toPython().rsplit('/')[-1])
     return Feature(id=oxpoints_id, geometry=geometry,
                     properties={'name': full_name,
@@ -26,7 +34,7 @@ def _get_type(graph, oxp_type, type_name, ignore=None):
     :param oxp_type: type expected
     :param type_name: mapped (friendly) type name
     :param ignore: list of subjects to ignore
-    :return list
+    :return list of features, list of URI processed
     """
     ignore = ignore or list()
     processed = list()
@@ -46,6 +54,7 @@ def _get_type(graph, oxp_type, type_name, ignore=None):
                 lon = graph.value(subject, Geo.long).toPython()
                 features.append(_get_feature(subject, title, short_name, type_name, Point(float(lon), float(lat))))
                 processed.append(subject)
+            # try to get info from the primary place of the thing
             else:
                 primary_place = graph.value(subject, OxPoints.primaryPlace)
                 if primary_place:
@@ -69,6 +78,8 @@ def do_buildings(graph):
     return FeatureCollection(features)
 
 def do_colleges(graph):
+    """Get colleges, halls and sites, but ignore sites of colleges and halls
+    """
     types = [
         (OxPoints.College, 'College'),
         (OxPoints.Hall, 'Hall'),
@@ -96,6 +107,7 @@ def do_departments(graph):
         feats, processed = _get_type(graph, oxp_type, type_name)
         features.extend(feats)
 
+    # Make sure we have only one shape per coordinates and per type
     shapes = dict()
     for feature in features:
         coord = feature['geometry']['coordinates']
