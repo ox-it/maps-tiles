@@ -18,7 +18,7 @@ def _get_feature(ident, full_name, short_name, type_name, geometry):
     return Feature(id=oxpoints_id, geometry=geometry,
                     properties={'name': full_name,
                                 'short_name': short_name or full_name,
-                                'type': type_name})
+                                'type_name': type_name})
 
 
 def do_buildings(graph):
