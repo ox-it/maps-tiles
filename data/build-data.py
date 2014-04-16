@@ -13,10 +13,11 @@ OxPoints = Namespace('http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#')
 Geometry = Namespace('http://data.ordnancesurvey.co.uk/ontology/geometry/')
 Geo = Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
 
-def _get_feature(ident, name, type_name, geometry):
+def _get_feature(ident, full_name, short_name, type_name, geometry):
     oxpoints_id = 'oxpoints:{ident}'.format(ident=ident.toPython().rsplit('/')[-1])
     return Feature(id=oxpoints_id, geometry=geometry,
-                    properties={'title': name,
+                    properties={'name': full_name,
+                                'short_name': short_name or full_name,
                                 'type': type_name})
 
 
@@ -28,16 +29,17 @@ def do_buildings(graph):
     features = []
     for subject in graph.subjects(RDF.type, OxPoints.Building):
         title = graph.value(subject, DC.title)
+        short_name = graph.value(subject, OxPoints.shortLabel)
         type_name = 'Building'
         shape = graph.value(subject, Geometry.extent)
         if shape:
             wkt = graph.value(shape, Geometry.asWKT).toPython()
-            features.append(_get_feature(subject, title, type_name, wkt_loads(wkt)))
+            features.append(_get_feature(subject, title, short_name, type_name, wkt_loads(wkt)))
         # fallback on latitude / longitude
         elif (subject, Geo.lat, None) in graph and (subject, Geo.long, None) in graph:
             lat = graph.value(subject, Geo.lat).toPython()
             lon = graph.value(subject, Geo.long).toPython()
-            features.append(_get_feature(subject, title, type_name, Point(float(lon), float(lat))))
+            features.append(_get_feature(subject, title, short_name, type_name, Point(float(lon), float(lat))))
 
     return FeatureCollection(features)
 
