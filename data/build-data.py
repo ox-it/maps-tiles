@@ -20,17 +20,15 @@ def _get_feature(ident, full_name, short_name, type_name, geometry):
                                 'short_name': short_name or full_name,
                                 'type_name': type_name})
 
-
-def do_buildings(graph):
-    """Get all buildings from OxPoints, use shape or fallback on lat/lon
+def _get_type(graph, oxp_type, type_name):
+    """Get all things from a type from OxPoints, use shape or fallback on lat/lon
     :param graph: rdflib Graph
-    :return FeatureCollection
+    :return list
     """
     features = []
-    for subject in graph.subjects(RDF.type, OxPoints.Building):
+    for subject in graph.subjects(RDF.type, oxp_type):
         title = graph.value(subject, DC.title)
         short_name = graph.value(subject, OxPoints.shortLabel)
-        type_name = 'Building'
         shape = graph.value(subject, Geometry.extent)
         if shape:
             wkt = graph.value(shape, Geometry.asWKT).toPython()
@@ -40,14 +38,51 @@ def do_buildings(graph):
             lat = graph.value(subject, Geo.lat).toPython()
             lon = graph.value(subject, Geo.long).toPython()
             features.append(_get_feature(subject, title, short_name, type_name, Point(float(lon), float(lat))))
+        else:
+            primary_place = graph.value(subject, OxPoints.primaryPlace)
+            if primary_place:
+                shape = graph.value(primary_place, Geometry.extent)
+                if shape:
+                    wkt = graph.value(shape, Geometry.asWKT).toPython()
+                    features.append(_get_feature(subject, title, short_name, type_name, wkt_loads(wkt)))
+                elif (primary_place, Geo.lat, None) in graph and (primary_place, Geo.long, None) in graph:
+                    lat = graph.value(primary_place, Geo.lat).toPython()
+                    lon = graph.value(primary_place, Geo.long).toPython()
+                    features.append(_get_feature(subject, title, short_name, type_name, Point(float(lon), float(lat))))
 
+
+    return features
+
+
+def do_buildings(graph):
+    features = _get_type(graph, OxPoints.Building, 'Building')
     return FeatureCollection(features)
 
 def do_colleges(graph):
-  pass
+    features = []
+    features.extend(_get_type(graph, OxPoints.College, 'College'))
+    features.extend(_get_type(graph, OxPoints.Hall, 'Hall'))
+    features.extend(_get_type(graph, OxPoints.Site, 'Site'))
+    return FeatureCollection(features)
 
 def do_departments(graph):
-  pass
+    features = list()
+    features.extend(_get_type(graph, OxPoints.Department, 'Department'))
+    features.extend(_get_type(graph, OxPoints.Faculty, 'Department'))
+    features.extend(_get_type(graph, OxPoints.Unit, 'Department'))
+    features.extend(_get_type(graph, OxPoints.Library, 'Library'))
+    features.extend(_get_type(graph, OxPoints.Museum, 'Museum'))
+
+    shapes = dict()
+    for feature in features:
+        coord = feature['geometry']['coordinates']
+        type_name = feature['properties']['type_name']
+        # Differentiate by type -- get only one shape per type
+        key = '{coords}-{type}'.format(coords=str(coord),
+                                          type=type_name)
+        shapes[key] = feature
+
+    return FeatureCollection(shapes.values())
 
 
 FUNCTIONS = {
@@ -57,24 +92,6 @@ FUNCTIONS = {
 }
 
 DEFAULT_SERIALIZATION = 'text/turtle'
-
-MAPPED_TYPES = [
-    (OxPoints.University, 'University'),
-    (OxPoints.College, 'College'),
-    (OxPoints.Department, 'Department'),
-    (OxPoints.Faculty, 'Department'),
-    (OxPoints.Unit, 'Department'),
-    (OxPoints.Library, 'Library'),
-    (OxPoints.SubLibrary, 'SubLibrary'),
-    (OxPoints.Division, 'Division'),
-    (OxPoints.Museum, 'Museum'),
-    (OxPoints.CarPark, 'CarPark'),
-    (OxPoints.Room, 'Room'),
-    (OxPoints.Hall, 'Hall'),
-    (OxPoints.Building, 'Building'),
-    (OxPoints.Space, 'Space'),
-    (OxPoints.Site, 'Site')
-]
 
 
 def main():
