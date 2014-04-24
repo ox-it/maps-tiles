@@ -297,7 +297,7 @@
     }
     [type='college'][zoom>=10],
     [type='university'][zoom>=10] {
-      text-fill: @oxfordblue;
+      text-fill: @oxfordMediumBlue;
       text-halo-fill: fadeout(white, 40%);
     }
     [type='school'][zoom>=10] {
@@ -342,7 +342,7 @@
   text-face-name:@sans;
   text-size:10;
   text-wrap-width:30;
-  text-fill: @oxfordblue;
+  text-fill: @oxfordMediumBlue;
 }
 
 

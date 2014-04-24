@@ -462,6 +462,46 @@
       "srs-name": "900913"
     },
     {
+      "Datasource": {
+        "dbname": "osm",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "geometry",
+        "key_field": "",
+        "table": "( SELECT geometry, type, name, area\n    FROM osm_buildings\n  ORDER BY ST_YMin(ST_Envelope(geometry)) DESC\n) AS data",
+        "type": "postgis",
+        "id": "buildings",
+        "project": "maps-ox",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "class": "",
+      "geometry": "polygon",
+      "id": "buildings",
+      "name": "buildings",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.2704257,
+        -3.6296592,
+        39.8558813,
+        51.7754
+      ],
+      "id": "university-colleges",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-colleges-halls-sites.json",
+        "id": "university-colleges",
+        "project": "maps-ox",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-colleges"
+    },
+    {
       "geometry": "polygon",
       "extent": [
         -1.309241,
@@ -494,7 +534,7 @@
       "class": "",
       "Datasource": {
         "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
-        "id": "university-shapes",
+        "id": "university-buildings",
         "project": "maps-ox",
         "srs": ""
       },
@@ -504,23 +544,22 @@
       "name": "university-buildings"
     },
     {
-      "Datasource": {
-        "dbname": "osm",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "geometry_field": "geometry",
-        "key_field": "",
-        "table": "( SELECT geometry, type, name, area\n    FROM osm_buildings\n  ORDER BY ST_YMin(ST_Envelope(geometry)) DESC\n) AS data",
-        "type": "postgis",
-        "id": "buildings",
-        "project": "maps-ox",
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
-      },
-      "class": "",
       "geometry": "polygon",
-      "id": "buildings",
-      "name": "buildings",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "extent": [
+        -1.37443,
+        51.6851,
+        -1.2062214,
+        51.81965
+      ],
+      "id": "university-departments",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/university-departments-museums-library.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-departments"
     },
     {
       "Datasource": {
@@ -539,7 +578,8 @@
       "id": "place",
       "name": "place",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "status": "off"
     },
     {
       "Datasource": {
@@ -559,7 +599,7 @@
       "name": "area_label",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
       "srs-name": "900913",
-      "status": "on"
+      "status": "off"
     },
     {
       "Datasource": {
@@ -642,22 +682,26 @@
       "status": "on"
     },
     {
-      "geometry": "point",
+      "geometry": "polygon",
       "extent": [
-        -1.37443,
-        -3.6296592,
-        39.8558813,
-        51.81965
+        -1.7302701,
+        51.5805917,
+        -1.199,
+        51.8189031
       ],
       "id": "university-labels",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university.json"
+        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
+        "id": "university-labels",
+        "project": "maps-ox",
+        "srs": ""
       },
       "srs-name": "autodetect",
       "srs": "",
       "advanced": {},
-      "name": "university-labels"
+      "name": "university-labels",
+      "status": "off"
     },
     {
       "geometry": "polygon",
@@ -683,12 +727,12 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.2704257,
+        -1.309241,
         -3.6296592,
         39.8558813,
-        51.7754
+        51.81965
       ],
-      "id": "university-colleges",
+      "id": "university-colleges-labels",
       "class": "",
       "Datasource": {
         "file": "/srv/tilemill/maps-tiles/data/university-colleges-halls-sites.json"
@@ -696,7 +740,28 @@
       "srs-name": "autodetect",
       "srs": "",
       "advanced": {},
-      "name": "university-colleges"
+      "name": "university-colleges-labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.7302701,
+        51.5805917,
+        -1.199,
+        51.8189031
+      ],
+      "id": "university-buildings-labels",
+      "class": "",
+      "Datasource": {
+        "file": "layers/university-buildings.json",
+        "id": "university-buildings-labels",
+        "project": "maps-ox",
+        "srs": ""
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "university-buildings-labels"
     },
     {
       "geometry": "polygon",
@@ -706,18 +771,19 @@
         -1.2062214,
         51.81965
       ],
-      "id": "university-departments",
+      "id": "university-departments-labels",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-departments-museums-library.json"
+        "file": "layers/university-departments.json"
       },
       "srs-name": "autodetect",
       "srs": "",
       "advanced": {},
-      "name": "university-departments"
+      "name": "university-departments-labels",
+      "status": "off"
     }
   ],
-  "scale": 2,
+  "scale": 1,
   "metatile": 6,
   "attribution": "Data © OpenStreetMap (and) contributors, CC-BY-SA",
   "description": "",

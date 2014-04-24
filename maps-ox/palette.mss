@@ -49,7 +49,7 @@ Map {
 @wooded:            desaturate(#C3D9AD, 10%);
 @agriculture:       desaturate(#F2E8B6, 30%);
 
-@building:          #B3975C;
+@building:          #E6E0D0;
 @hospital:          desaturate(rgb(229,198,195), 30%);
 @school:            desaturate(#FFF5CC, 30%);
 @sports:            desaturate(#B8E6B8, 30%);
@@ -153,7 +153,48 @@ Map {
 /* OXFORD COLORS
 /* ================================================================== */
 
-@oxfordblue: #002147;
-@oxfordlightblue: #04508f;
-@oxfordgold: #B3975C;
+@pantone282: rgb(0, 33, 71);
+@pantone279: rgb(72, 145, 220);
+@pantone291: rgb(159, 206, 235);
+@pantone5405: rgb(68, 104, 125);
+@pantone549: rgb(95, 155, 175);
+@pantone551: rgb(161, 196, 208);
+@pantone562: rgb(0, 119, 112);
+@pantone624: rgb(123, 162, 150);
+@pantone559: rgb(188, 210, 195);
+@pantone576: rgb(105, 145, 59);
+@pantone578: rgb(185, 207, 150);
+@pantone580: rgb(206, 219, 175);
+@pantone583: rgb(170, 179, 0);
+@pantone585: rgb(219, 222, 114);
+@pantone587: rgb(227, 229, 151);
+@pantone7412: rgb(207, 122, 48);
+@pantone129: rgb(245, 207, 71);
+@pantone127: rgb(243, 222, 116);
+@pantone202: rgb(135, 36, 52);
+@pantone200: rgb(190, 15, 52);
+@pantone196: rgb(167, 157, 150);
+@pantoneWarmGray6: rgb(167, 157, 150);
+@pantoneWarmGray3: rgb(199, 194, 188);
+@pantoneWarmGray1: rgb(224, 222, 217);
+
+// Near approximations (CMYK colours)
+@pantone872: #b2965b;
+@pantone877: #a7a8ac;
+
+// Colours
+@highlightBlue: @pantone279;
+@oxfordLightBlue: @pantone551;
+@oxfordMediumBlue: @pantone549;
+@oxfordDarkBlue: @pantone5405;
+@oxfordBlue: @pantone282;
+@oxfordGold: @pantone872;
+
+//Types
+@universityBuilding: @pantoneWarmGray3;
+@universityBuildingOutline: @pantoneWarmGray6;
+@universitySite:@oxfordLightBlue;
+@universitySiteOutline:@oxfordMediumBlue;
+@collegeBuilding: rgb(210, 194, 181);
+@collegeBuildingOutline: @pantoneWarmGray6;
 
