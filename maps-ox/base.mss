@@ -37,8 +37,8 @@
   [type='school']        { polygon-fill: @school; }
   [type='sports_center'] { polygon-fill: @sports; }
   [type='stadium']       { polygon-fill: @sports; }
-  [type='university']    { polygon-fill: @school; }
   [type='wood']          { polygon-fill: @wooded; }
+  [type='university']    { polygon-fill: @school; }
 }
 
 #landuse_overlays[type='nature_reserve'][zoom>6] {
@@ -63,10 +63,16 @@
 /* ---- BUILDINGS ---- */
 #buildings {
   building-fill:@building;
-  building-fill-opacity: 0.3;
-  line-color:lighten(@building, 50%);
+  line-color:darken(@building, 5%);
   line-width:1;
-  line-opacity:0.4;
+  [zoom < 17] {
+    line-width: 0.5;
+  }
+//  [type="university"],
+  [type="college"]  {
+    building-fill:@collegeBuilding;
+    line-color:@collegeBuildingOutline;
+  }
 }
 
 /* ================================================================== */
