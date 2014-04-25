@@ -1,5 +1,5 @@
 @font: @sans;
-@value: [short_name];
+@value: [name];
 
 #curated-labels {
   [zoom<=16] {
