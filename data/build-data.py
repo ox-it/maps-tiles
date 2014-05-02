@@ -26,10 +26,10 @@ def _get_feature(ident, name, type_name, geometry):
                     properties={'name': name,
                                 'type_name': type_name})
 
-def _get_type(graph, oxp_type, type_name, ignore=None):
+def _get_type(graph, subjects, type_name, ignore=None):
     """Get all things from a type from OxPoints, use shape or fallback on lat/lon
     :param graph: rdflib Graph
-    :param oxp_type: type expected
+    :param subjects: subjects to process
     :param type_name: mapped (friendly) type name
     :param ignore: list of subjects to ignore
     :return list of features, list of URI processed
@@ -37,7 +37,7 @@ def _get_type(graph, oxp_type, type_name, ignore=None):
     ignore = ignore or list()
     processed = list()
     features = list()
-    for subject in graph.subjects(RDF.type, oxp_type):
+    for subject in subjects:
         if subject not in ignore:
             title = graph.value(subject, DC.title)
             short_name = graph.value(subject, OxPoints.shortLabel)
@@ -88,10 +88,10 @@ def do_colleges(graph):
     features = list()
     to_ignore = list()
     for oxp_type, type_name in types:
-        feats, processed = _get_type(graph, oxp_type, type_name)
+        feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), type_name)
         features.extend(feats)
         to_ignore.extend(processed)
-    feats, processed = _get_type(graph, OxPoints.Site, 'Site', ignore=to_ignore)
+    feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), 'Site', ignore=to_ignore)
     features.extend(feats)
     return FeatureCollection(features)
 
@@ -105,7 +105,7 @@ def do_departments(graph):
     ]
     features = list()
     for oxp_type, type_name in types:
-        feats, processed = _get_type(graph, oxp_type, type_name)
+        feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), type_name)
         features.extend(feats)
 
     # Make sure we have only one shape per coordinates and per type
