@@ -87,7 +87,14 @@ def do_colleges_buildings(graph):
 
 
 def do_other_buildings(graph):
-    features, processed = _get_type(graph, OxPoints.Building, 'Building')
+    qres = graph.query(
+        """SELECT DISTINCT ?building
+        WHERE {
+            ?building <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#Building> .
+            ?occupied <http://www.w3.org/ns/org#hasSite> ?building .
+        FILTER NOT EXISTS { ?occupied <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#College> } . }""")
+
+    features, processed = _get_type(graph, [row[0] for row in qres], 'Building')
     return FeatureCollection(features)
 
 
