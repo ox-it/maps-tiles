@@ -74,9 +74,22 @@ def _get_type(graph, subjects, type_name, ignore=None):
     return features, processed
 
 
-def do_buildings(graph):
+def do_colleges_buildings(graph):
+    qres = graph.query(
+        """SELECT DISTINCT ?building
+        WHERE {
+            ?building <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#Building> .
+            ?occupied <http://www.w3.org/ns/org#hasSite> ?building .
+            ?occupied <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#College> . }""")
+
+    features, processed = _get_type(graph, [row[0] for row in qres], 'Building')
+    return FeatureCollection(features)
+
+
+def do_other_buildings(graph):
     features, processed = _get_type(graph, OxPoints.Building, 'Building')
     return FeatureCollection(features)
+
 
 def do_colleges(graph):
     """Get colleges, halls and sites, but ignore sites of colleges and halls
@@ -122,7 +135,8 @@ def do_departments(graph):
 
 
 FUNCTIONS = {
-  'buildings': do_buildings,    # Buildings only
+  'collegesbuildings': do_colleges_buildings,    # Colleges buildings
+  'otherbuildings': do_other_buildings,     # all buildings except Colleges buildings
   'colleges': do_colleges,   # Site, College, Hall
   'departments': do_departments,  # Department, Library, Museum
 }
