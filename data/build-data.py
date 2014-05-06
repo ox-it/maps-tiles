@@ -12,6 +12,11 @@ from shapely.geometry import Point
 OxPoints = Namespace('http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#')
 Geometry = Namespace('http://data.ordnancesurvey.co.uk/ontology/geometry/')
 Geo = Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
+Org = Namespace('http://www.w3.org/ns/org#')
+SpatialRelations = Namespace('http://data.ordnancesurvey.co.uk/ontology/spatialrelations/')
+
+DEFAULT_NAMESPACES = {'oxp': OxPoints, 'spatialrelations': SpatialRelations, 'org': Org}
+
 
 def _get_feature(ident, name, type_name, geometry):
     """Prepare a GeoJSON feature
@@ -87,29 +92,18 @@ def do_colleges_buildings(graph):
 
 
 def do_other_buildings(graph):
-    buildings_not_occupied_by_colleges = """SELECT DISTINCT ?building
-            WHERE {
-                ?building <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#Building> .
-                ?occupied <http://www.w3.org/ns/org#hasSite> ?building .
-            FILTER NOT EXISTS { ?occupied <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#College> } . }
-    """
 
-    buildings_without_occupiers = """SELECT DISTINCT ?building
-            WHERE {
-                ?building <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#Building> .
-            FILTER NOT EXISTS { ?occupied <http://www.w3.org/ns/org#hasSite> ?building } . }
-    """
+    buildings_not_occupied_by_colleges = """SELECT ?building WHERE {
+                                              ?building a oxp:Building .
+                                              FILTER NOT EXISTS {
+                                                ?building spatialrelations:within*/^org:hasSite/org:subOrganizationOf*/rdf:type ?type .
+                                                FILTER (?type IN (oxp:Hall, oxp:College))
+                                              }
+                                            }"""
 
-    result_not_colleges = graph.query(buildings_not_occupied_by_colleges)
+    result_not_colleges = graph.query(buildings_not_occupied_by_colleges, initNs=DEFAULT_NAMESPACES)
 
-    result_no_occupiers = graph.query(buildings_without_occupiers)
-
-    results = set()
-
-    results.update([row[0] for row in result_not_colleges])
-    results.update([row[0] for row in result_no_occupiers])
-
-    features, processed = _get_type(graph, list(results), 'Building')
+    features, processed = _get_type(graph, [row[0] for row in result_not_colleges], 'Building')
     return FeatureCollection(features)
 
 
