@@ -80,12 +80,14 @@ def _get_type(graph, subjects, type_name, ignore=None):
 
 
 def do_colleges_buildings(graph):
-    qres = graph.query(
-        """SELECT DISTINCT ?building
-        WHERE {
-            ?building <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#Building> .
-            ?occupied <http://www.w3.org/ns/org#hasSite> ?building .
-            ?occupied <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#College> . }""")
+
+    query = """SELECT DISTINCT ?building
+    WHERE {
+        ?building a oxp:Building .
+        ?occupied org:hasSite ?building .
+        ?occupied a oxp:College . }"""
+
+    qres = graph.query(query, initNs=DEFAULT_NAMESPACES)
 
     features, processed = _get_type(graph, [row[0] for row in qres], 'Building')
     return FeatureCollection(features)
