@@ -116,7 +116,7 @@ def do_other_buildings(graph):
                                                 FILTER (?type IN (oxp:Hall, oxp:College))
                                               } .
                                               FILTER NOT EXISTS {
-                                                ?building org:hasSite ?site .
+                                                ?building org:hasSite|spatialrelations:within ?site .
                                                 ?site a oxp:Site .
                                                 ?site org:hasSite ?type .
                                                 FILTER (?type IN (oxp:Hall, oxp:College))
