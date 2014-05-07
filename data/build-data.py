@@ -105,6 +105,10 @@ def do_other_buildings(graph):
     :return GeoJSON FeatureCollection
     """
 
+    # 1) get all buildings
+    # 2) filter buildings having a relation to a College or an Hall
+    # 3) filter buildings having a relation to a Site related to a College or an Hall
+    # see property paths documentation at http://www.w3.org/TR/sparql11-query/#propertypaths
     buildings_not_occupied_by_colleges = """SELECT ?building WHERE {
                                               ?building a oxp:Building .
                                               FILTER NOT EXISTS {
