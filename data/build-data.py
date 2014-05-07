@@ -80,6 +80,10 @@ def _get_type(graph, subjects, type_name, ignore=None):
 
 
 def do_colleges_buildings(graph):
+    """Get buildings contained by a College
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
 
     query = """SELECT DISTINCT ?building
     WHERE {
@@ -94,6 +98,12 @@ def do_colleges_buildings(graph):
 
 
 def do_other_buildings(graph):
+    """Get buildings not contained by a college, or a college's site
+    Meaning buildings occupied by something else than a College (e.g. Department),
+    or not having a known occupier
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
 
     buildings_not_occupied_by_colleges = """SELECT ?building WHERE {
                                               ?building a oxp:Building .
@@ -117,6 +127,8 @@ def do_other_buildings(graph):
 
 def do_colleges(graph):
     """Get colleges, halls and sites, but ignore sites of colleges and halls
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
     """
     types = [
         (OxPoints.College, 'College'),
@@ -133,6 +145,12 @@ def do_colleges(graph):
     return FeatureCollection(features)
 
 def do_departments(graph):
+    """Get Department, Faculty, Unit, Library and Museum
+    Only get one shape per type (to avoid e.g. multiple departments
+    occupying the same building)
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
     types = [
         (OxPoints.Department, 'Department'),
         (OxPoints.Faculty, 'Department'),
