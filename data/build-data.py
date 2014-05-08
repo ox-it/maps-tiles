@@ -12,6 +12,11 @@ from shapely.geometry import Point
 OxPoints = Namespace('http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#')
 Geometry = Namespace('http://data.ordnancesurvey.co.uk/ontology/geometry/')
 Geo = Namespace('http://www.w3.org/2003/01/geo/wgs84_pos#')
+Org = Namespace('http://www.w3.org/ns/org#')
+SpatialRelations = Namespace('http://data.ordnancesurvey.co.uk/ontology/spatialrelations/')
+
+DEFAULT_NAMESPACES = {'oxp': OxPoints, 'spatialrelations': SpatialRelations, 'org': Org}
+
 
 def _get_feature(ident, name, type_name, geometry):
     """Prepare a GeoJSON feature
@@ -26,10 +31,10 @@ def _get_feature(ident, name, type_name, geometry):
                     properties={'name': name,
                                 'type_name': type_name})
 
-def _get_type(graph, oxp_type, type_name, ignore=None):
+def _get_type(graph, subjects, type_name, ignore=None):
     """Get all things from a type from OxPoints, use shape or fallback on lat/lon
     :param graph: rdflib Graph
-    :param oxp_type: type expected
+    :param subjects: subjects to process
     :param type_name: mapped (friendly) type name
     :param ignore: list of subjects to ignore
     :return list of features, list of URI processed
@@ -37,7 +42,7 @@ def _get_type(graph, oxp_type, type_name, ignore=None):
     ignore = ignore or list()
     processed = list()
     features = list()
-    for subject in graph.subjects(RDF.type, oxp_type):
+    for subject in subjects:
         if subject not in ignore:
             title = graph.value(subject, DC.title)
             short_name = graph.value(subject, OxPoints.shortLabel)
@@ -74,12 +79,60 @@ def _get_type(graph, oxp_type, type_name, ignore=None):
     return features, processed
 
 
-def do_buildings(graph):
-    features, processed = _get_type(graph, OxPoints.Building, 'Building')
+def do_colleges_buildings(graph):
+    """Get buildings contained by a College
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
+
+    query = """SELECT DISTINCT ?building
+    WHERE {
+        ?building a oxp:Building .
+        ?occupied org:hasSite ?building .
+        ?occupied a oxp:College . }"""
+
+    qres = graph.query(query, initNs=DEFAULT_NAMESPACES)
+
+    features, processed = _get_type(graph, [row[0] for row in qres], 'Building')
     return FeatureCollection(features)
+
+
+def do_other_buildings(graph):
+    """Get buildings not contained by a college, or a college's site
+    Meaning buildings occupied by something else than a College (e.g. Department),
+    or not having a known occupier
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
+
+    # 1) get all buildings
+    # 2) filter buildings having a relation to a College or an Hall
+    # 3) filter buildings having a relation to a Site related to a College or an Hall
+    # see property paths documentation at http://www.w3.org/TR/sparql11-query/#propertypaths
+    buildings_not_occupied_by_colleges = """SELECT ?building WHERE {
+                                              ?building a oxp:Building .
+                                              FILTER NOT EXISTS {
+                                                ?building spatialrelations:within*/^org:hasSite/org:subOrganizationOf*/rdf:type ?type .
+                                                FILTER (?type IN (oxp:Hall, oxp:College))
+                                              } .
+                                              FILTER NOT EXISTS {
+                                                ?building org:hasSite|spatialrelations:within ?site .
+                                                ?site a oxp:Site .
+                                                ?site org:hasSite ?type .
+                                                FILTER (?type IN (oxp:Hall, oxp:College))
+                                              }
+                                            }"""
+
+    result_not_colleges = graph.query(buildings_not_occupied_by_colleges, initNs=DEFAULT_NAMESPACES)
+
+    features, processed = _get_type(graph, [row[0] for row in result_not_colleges], 'Building')
+    return FeatureCollection(features)
+
 
 def do_colleges(graph):
     """Get colleges, halls and sites, but ignore sites of colleges and halls
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
     """
     types = [
         (OxPoints.College, 'College'),
@@ -88,14 +141,20 @@ def do_colleges(graph):
     features = list()
     to_ignore = list()
     for oxp_type, type_name in types:
-        feats, processed = _get_type(graph, oxp_type, type_name)
+        feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), type_name)
         features.extend(feats)
         to_ignore.extend(processed)
-    feats, processed = _get_type(graph, OxPoints.Site, 'Site', ignore=to_ignore)
+    feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), 'Site', ignore=to_ignore)
     features.extend(feats)
     return FeatureCollection(features)
 
 def do_departments(graph):
+    """Get Department, Faculty, Unit, Library and Museum
+    Only get one shape per type (to avoid e.g. multiple departments
+    occupying the same building)
+    :param graph: RDFLib graph to process
+    :return GeoJSON FeatureCollection
+    """
     types = [
         (OxPoints.Department, 'Department'),
         (OxPoints.Faculty, 'Department'),
@@ -105,7 +164,7 @@ def do_departments(graph):
     ]
     features = list()
     for oxp_type, type_name in types:
-        feats, processed = _get_type(graph, oxp_type, type_name)
+        feats, processed = _get_type(graph, graph.subjects(RDF.type, oxp_type), type_name)
         features.extend(feats)
 
     # Make sure we have only one shape per coordinates and per type
@@ -122,7 +181,8 @@ def do_departments(graph):
 
 
 FUNCTIONS = {
-  'buildings': do_buildings,    # Buildings only
+  'collegesbuildings': do_colleges_buildings,    # Colleges buildings
+  'otherbuildings': do_other_buildings,     # all buildings except Colleges buildings
   'colleges': do_colleges,   # Site, College, Hall
   'departments': do_departments,  # Department, Library, Museum
 }
