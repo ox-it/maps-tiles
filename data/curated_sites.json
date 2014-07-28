@@ -50,5 +50,18 @@
             "name": "John Radcliffe Hospital",
             "short_name": "John Radcliffe Hospital"
         }
+    },
+    {
+        "geometry":
+        {"type": "Polygon", "coordinates": [[[-1.2619659, 51.7605836], [-1.2622049, 51.7609375], [-1.2623127, 51.760922], [-1.2624811, 51.7609183], [-1.2633638, 51.760642], [-1.2634781, 51.7605682], [-1.2635149, 51.7604743], [-1.2629517, 51.759624], [-1.2623746, 51.759804], [-1.2620571, 51.7598933], [-1.2620276, 51.7598535], [-1.2614966, 51.7600062], [-1.2619659, 51.7605836]]]},
+        "type": "Feature",
+        "id": "oxpoints:54542854",
+        "properties":
+        {
+            "type_name": "Site",
+            "type": "/university/site",
+            "name": "Radcliffe Observatory Quarter",
+            "short_name": "Radcliffe Observatory Quarter"
+        }
     }
 ]}
