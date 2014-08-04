@@ -522,28 +522,7 @@
       "advanced": {},
       "name": "curated-shapes"
     },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -1.7302701,
-        51.5805917,
-        -1.199,
-        51.8189031
-      ],
-      "id": "university-buildings",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
-        "id": "university-buildings",
-        "project": "maps-ox",
-        "srs": ""
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-buildings"
-    },
-    {
+   {
       "geometry": "polygon",
       "extent": [
         -1.37443,
@@ -684,28 +663,6 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.7302701,
-        51.5805917,
-        -1.199,
-        51.8189031
-      ],
-      "id": "university-labels",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
-        "id": "university-labels",
-        "project": "maps-ox",
-        "srs": ""
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-labels",
-      "status": "off"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
         -1.309241,
         51.7513682,
         -1.2134294,
@@ -742,28 +699,7 @@
       "advanced": {},
       "name": "university-colleges-labels"
     },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -1.7302701,
-        51.5805917,
-        -1.199,
-        51.8189031
-      ],
-      "id": "university-buildings-labels",
-      "class": "",
-      "Datasource": {
-        "file": "layers/university-buildings.json",
-        "id": "university-buildings-labels",
-        "project": "maps-ox",
-        "srs": ""
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-buildings-labels"
-    },
-    {
+   {
       "geometry": "polygon",
       "extent": [
         -1.37443,
