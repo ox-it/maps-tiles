@@ -483,10 +483,10 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.2704257,
-        -3.6296592,
-        39.8558813,
-        51.7754
+        -1.2700006,
+        51.7461716,
+        -1.2380265,
+        51.7732674
       ],
       "id": "university-colleges",
       "class": "",
@@ -533,7 +533,7 @@
       "id": "university-buildings",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
+        "file": "/srv/tilemill/maps-tiles/data/other-buildings.json",
         "id": "university-buildings",
         "project": "maps-ox",
         "srs": ""
@@ -559,7 +559,8 @@
       "srs-name": "autodetect",
       "srs": "",
       "advanced": {},
-      "name": "university-departments"
+      "name": "university-departments",
+      "status": "off"
     },
     {
       "Datasource": {
@@ -684,28 +685,6 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.7302701,
-        51.5805917,
-        -1.199,
-        51.8189031
-      ],
-      "id": "university-labels",
-      "class": "",
-      "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-buildings.json",
-        "id": "university-labels",
-        "project": "maps-ox",
-        "srs": ""
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-labels",
-      "status": "off"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
         -1.309241,
         51.7513682,
         -1.2134294,
@@ -727,15 +706,15 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.309241,
-        -3.6296592,
-        39.8558813,
-        51.81965
+        -1.2637469,
+        51.726788,
+        -1.238381,
+        51.7720724
       ],
       "id": "university-colleges-labels",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/university-colleges-halls-sites.json"
+        "file": "/srv/tilemill/maps-tiles/data/colleges-buildings.json"
       },
       "srs-name": "autodetect",
       "srs": "",
@@ -753,7 +732,7 @@
       "id": "university-buildings-labels",
       "class": "",
       "Datasource": {
-        "file": "layers/university-buildings.json",
+        "file": "/srv/tilemill/maps-tiles/data/other-buildings.json",
         "id": "university-buildings-labels",
         "project": "maps-ox",
         "srs": ""
@@ -762,25 +741,6 @@
       "srs": "",
       "advanced": {},
       "name": "university-buildings-labels"
-    },
-    {
-      "geometry": "polygon",
-      "extent": [
-        -1.37443,
-        51.6851,
-        -1.2062214,
-        51.81965
-      ],
-      "id": "university-departments-labels",
-      "class": "",
-      "Datasource": {
-        "file": "layers/university-departments.json"
-      },
-      "srs-name": "autodetect",
-      "srs": "",
-      "advanced": {},
-      "name": "university-departments-labels",
-      "status": "off"
     }
   ],
   "scale": 1,
