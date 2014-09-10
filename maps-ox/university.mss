@@ -10,10 +10,10 @@
       text-size: 16;
       text-halo-fill: fadeout(white, 40%);
       text-halo-radius: 1.5;
-      text-placement: point;
+      text-min-distance: 5;
       text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
       text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";
-      text-max-char-angle-delta: 15;
+      text-allow-overlap: true;
       text-wrap-width: 25;
     }
   }
