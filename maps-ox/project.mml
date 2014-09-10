@@ -546,6 +546,24 @@
     {
       "geometry": "polygon",
       "extent": [
+        -1.2697211,
+        49.46702,
+        17.964502,
+        53.5597999
+      ],
+      "id": "colleges-buildings",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/colleges-buildings.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "colleges-buildings"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
         -1.37443,
         51.6851,
         -1.2062214,
@@ -744,6 +762,24 @@
       "srs": "",
       "advanced": {},
       "name": "university-buildings-labels"
+    },
+    {
+      "geometry": "polygon",
+      "extent": [
+        -1.2697211,
+        49.46702,
+        17.964502,
+        53.5597999
+      ],
+      "id": "colleges-buildings-labels",
+      "class": "",
+      "Datasource": {
+        "file": "/srv/tilemill/maps-tiles/data/colleges-buildings.json"
+      },
+      "srs-name": "autodetect",
+      "srs": "",
+      "advanced": {},
+      "name": "colleges-buildings-labels"
     }
   ],
   "scale": 1,

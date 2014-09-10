@@ -295,15 +295,6 @@
       text-fill: @hospital * 0.6;
       text-halo-fill: lighten(@hospital, 10);
     }
-    [type='college'][zoom>=10],
-    [type='university'][zoom>=10] {
-      text-fill: @oxfordMediumBlue;
-      text-halo-fill: fadeout(white, 40%);
-    }
-    [type='school'][zoom>=10] {
-      text-fill: @school * 0.6;
-      text-halo-fill: lighten(@school, 10);
-    }
     [type='water'][zoom>=10] {
       text-fill: @water * 0.6;
       text-halo-fill: lighten(@water, 10);
@@ -333,18 +324,6 @@
     text-wrap-width: 180;
   }
 }
-   
-#poi[type='university'][zoom>=15],
-#poi[type='hospital'][zoom>=16],
-#poi[type='school'][zoom>=17],
-#poi[type='library'][zoom>=17] {
-  text-name:"[name]";
-  text-face-name:@sans;
-  text-size:10;
-  text-wrap-width:30;
-  text-fill: @oxfordMediumBlue;
-}
-
 
 /* ================================================================== */
 /* WATERWAY LABELS
