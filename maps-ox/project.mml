@@ -706,15 +706,18 @@
     {
       "geometry": "polygon",
       "extent": [
-        -1.2637469,
-        51.726788,
-        -1.238381,
-        51.7720724
+        -1.2700006,
+        51.7461716,
+        -1.2380265,
+        51.7732674
       ],
       "id": "university-colleges-labels",
       "class": "",
       "Datasource": {
-        "file": "/srv/tilemill/maps-tiles/data/colleges-buildings.json"
+        "file": "/srv/tilemill/maps-tiles/data/university-colleges-halls-sites.json",
+        "id": "university-colleges-labels",
+        "project": "maps-ox",
+        "srs": ""
       },
       "srs-name": "autodetect",
       "srs": "",
