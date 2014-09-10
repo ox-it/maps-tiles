@@ -39,9 +39,9 @@
 }
 
 #university-colleges-labels {
-  [type_name='Site'][zoom>16],
-  [type_name='College'],
-  [type_name='Hall']    
+  [type_name='Site'][zoom>=16],
+  [type_name='College'][zoom>=16],
+  [type_name='Hall'][zoom>=16]    
  {
       ::labels {
         text-face-name: @font;
