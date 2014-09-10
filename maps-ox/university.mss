@@ -10,10 +10,10 @@
       text-size: 16;
       text-halo-fill: fadeout(white, 40%);
       text-halo-radius: 1.5;
-      text-placement: point;
+      text-min-distance: 5;
       text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
       text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";
-      text-max-char-angle-delta: 15;
+      text-allow-overlap: true;
       text-wrap-width: 25;
     }
   }
@@ -37,10 +37,11 @@
       }
     }
 }
+
 #university-colleges-labels {
-  [type_name='Site'][zoom>16],
-  [type_name='College'],
-  [type_name='Hall']    
+  [type_name='Site'][zoom>=16],
+  [type_name='College'][zoom>=16],
+  [type_name='Hall'][zoom>=16]    
  {
       ::labels {
         text-face-name: @font;
@@ -62,8 +63,43 @@
     }
 }
 
+#colleges-buildings-labels {
+   [zoom>=18] {
+      ::labels {
+        text-face-name: @font;
+        text-name: @value;
+        text-fill: @oxfordDarkBlue;
+        text-size: 11;
+        text-halo-fill: fadeout(white, 40%);
+        text-halo-radius: 1;
+        text-placement: point;
+        text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
+        text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";
+        text-max-char-angle-delta: 15;
+        text-wrap-width: 25;
+        text-min-distance: 2;
+      }
+    }
+}
+
 // buildings
 #university-buildings {
+  ::polygon {
+      polygon-opacity: 1;
+      polygon-fill: @universityBuilding;
+  }
+  ::outline {
+    line-color: @universityBuildingOutline;
+    line-width: 1;
+  }
+  [zoom < 17] {
+    ::outline {
+      line-width: 0.5;
+    }
+  }  
+}
+
+#colleges-buildings {
   ::polygon {
       polygon-opacity: 1;
       polygon-fill: @universityBuilding;

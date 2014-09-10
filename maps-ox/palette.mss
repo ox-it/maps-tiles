@@ -40,14 +40,14 @@ Map {
 /* LANDUSE & LANDCOVER COLORS
 /* ================================================================== */
 
-@land:              desaturate(#FCFBE7, 30%);
-@water:             desaturate(#C4DFF6, 30%);
-@grass:             desaturate(#E6F2C1, 30%);
-@beach:             desaturate(#FFEEC7, 30%);
-@park:              desaturate(#DAF2C1, 30%);
-@cemetery:          desaturate(#D6DED2, 30%);
+@land:              desaturate(#FCFBE7, 20%);
+@water:             desaturate(#C4DFF6, 20%);
+@grass:             desaturate(#E6F2C1, 20%);
+@beach:             desaturate(#FFEEC7, 20%);
+@park:              desaturate(#DAF2C1, 20%);
+@cemetery:          desaturate(#D6DED2, 20%);
 @wooded:            desaturate(#C3D9AD, 10%);
-@agriculture:       desaturate(#F2E8B6, 30%);
+@agriculture:       desaturate(#F2E8B6, 20%);
 
 @building:          #E6E0D0;
 @hospital:          desaturate(rgb(229,198,195), 30%);
