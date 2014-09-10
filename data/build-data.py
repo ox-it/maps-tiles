@@ -85,15 +85,31 @@ def do_colleges_buildings(graph):
     :return GeoJSON FeatureCollection
     """
 
-    query = """SELECT DISTINCT ?building
+    buildings = set()
+
+    # buildings directly attached to College
+    college_query = """SELECT DISTINCT ?building
     WHERE {
         ?building a oxp:Building .
         ?occupied org:hasSite ?building .
         ?occupied a oxp:College . }"""
 
-    qres = graph.query(query, initNs=DEFAULT_NAMESPACES)
+    qres = graph.query(college_query, initNs=DEFAULT_NAMESPACES)
+    buildings.update([row[0] for row in qres])
 
-    features, processed = _get_type(graph, [row[0] for row in qres], 'Building')
+    # buildings attached to sites occupied by colleges
+    site_query = """SELECT DISTINCT ?building
+    WHERE {
+        ?college a oxp:College .
+        ?college org:hasSite ?site .
+        ?site a oxp:Site .
+        ?building a oxp:Building .
+        ?building spatialrelations:within ?site . }"""
+
+    qres = graph.query(site_query, initNs=DEFAULT_NAMESPACES)
+    buildings.update([row[0] for row in qres])
+
+    features, processed = _get_type(graph, buildings, 'Building')
     return FeatureCollection(features)
 
 
