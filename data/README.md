@@ -14,6 +14,8 @@ Run the python script (see requirements.txt) to prepare the three different laye
 
     python build-data.py <oxpoints> <shapes> buildings|departments|colleges > your-output-file.json
 
+Alternatively, you can use the Makefile provided.
+
 Curated sites
 -------------
 
