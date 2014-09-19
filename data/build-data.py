@@ -7,6 +7,7 @@ from geojson import load as geojson_load
 from geojson import dumps as geojson_dumps
 from geojson import Feature, FeatureCollection
 from shapely.wkt import loads as wkt_loads
+from shapely.geos import ReadingError
 from shapely.geometry import Point
 
 OxPoints = Namespace('http://ns.ox.ac.uk/namespace/oxpoints/2009/02/owl#')
@@ -66,10 +67,18 @@ def _get_type(graph, subjects, type_name, ignore=None):
                 if primary_place:
                     shape = graph.value(primary_place, Geometry.extent)
                     if shape:
-                        wkt = graph.value(shape, Geometry.asWKT).toPython()
-                        features.append(_get_feature(subject, name, type_name, wkt_loads(wkt)))
-                        processed.append(subject)
-                        processed.append(primary_place)
+                        wkt = graph.value(shape, Geometry.asWKT)
+                        if not wkt:
+                            sys.stderr.write("!! No WKT for {place}\n".format(place=primary_place))
+                        else:
+                            wkt = wkt.toPython()
+                            try:
+                                features.append(_get_feature(subject, name, type_name, wkt_loads(wkt)))
+                            except ReadingError as e:
+                                sys.stderr.write("!! Issue with WKT for {place}: {exc}\n".format(place=primary_place,
+                                                                                                 exc=e))
+                            processed.append(subject)
+                            processed.append(primary_place)
                     elif (primary_place, Geo.lat, None) in graph and (primary_place, Geo.long, None) in graph:
                         lat = graph.value(primary_place, Geo.lat).toPython()
                         lon = graph.value(primary_place, Geo.long).toPython()
