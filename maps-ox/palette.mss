@@ -40,19 +40,19 @@ Map {
 /* LANDUSE & LANDCOVER COLORS
 /* ================================================================== */
 
-@land:              desaturate(#FCFBE7, 20%);
-@water:             desaturate(#C4DFF6, 20%);
-@grass:             desaturate(#E6F2C1, 20%);
-@beach:             desaturate(#FFEEC7, 20%);
-@park:              desaturate(#DAF2C1, 20%);
-@cemetery:          desaturate(#D6DED2, 20%);
-@wooded:            desaturate(#C3D9AD, 10%);
-@agriculture:       desaturate(#F2E8B6, 20%);
+@land:              desaturate(#FCFBea, 5%);
+@water:             desaturate(#C4DFfa, 5%);
+@grass:             desaturate(#dae3c3, 10%);
+@beach:             desaturate(#FFEEca, 10%);
+@park:              desaturate(#D3ecc0, 10%);
+@cemetery:          desaturate(#D6DEd5, 10%);
+@wooded:            desaturate(#b7D0a5, 5%);
+@agriculture:       desaturate(#F2E8ba, 5%);
 
-@building:          #E6E0D0;
-@hospital:          desaturate(rgb(229,198,195), 30%);
-@school:            desaturate(#FFF5CC, 30%);
-@sports:            desaturate(#B8E6B8, 30%);
+@building:          #E0dad5;
+@hospital:          desaturate(rgb(229,198,205), 10%);
+@school:            desaturate(#FFF5cC, 10%);
+@sports:            desaturate(#a9dab0, 15%);
 
 @residential:       @land * 0.98;
 @commercial:        @land * 0.97;
@@ -175,7 +175,7 @@ Map {
 @pantone200: rgb(190, 15, 52);
 @pantone196: rgb(167, 157, 150);
 @pantoneWarmGray6: rgb(167, 157, 150);
-@pantoneWarmGray3: rgb(199, 194, 188);
+@pantoneWarmGray3: rgb(199, 194, 198);
 @pantoneWarmGray1: rgb(224, 222, 217);
 
 // Near approximations (CMYK colours)
@@ -191,7 +191,8 @@ Map {
 @oxfordGold: @pantone872;
 
 //Types
-@universityBuilding: @pantoneWarmGray3;
+@universityBuilding: darken(@pantoneWarmGray3, 6%
+  );
 @universityBuildingOutline: @pantoneWarmGray6;
 @universitySite:@oxfordLightBlue;
 @universitySiteOutline:@oxfordMediumBlue;
