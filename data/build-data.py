@@ -52,9 +52,17 @@ def _get_type(graph, subjects, type_name, ignore=None):
             name = map_label or short_name or title
             shape = graph.value(subject, Geometry.extent)
             if shape:
-                wkt = graph.value(shape, Geometry.asWKT).toPython()
-                features.append(_get_feature(subject, name, type_name, wkt_loads(wkt)))
-                processed.append(subject)
+                wkt = graph.value(shape, Geometry.asWKT)
+                if not wkt:
+                    sys.stderr.write("!! No WKT for {place}\n".format(place=subject))
+                else:
+                    wkt = wkt.toPython()
+                    try:
+                        features.append(_get_feature(subject, name, type_name, wkt_loads(wkt)))
+                    except ReadingError as e:
+                        sys.stderr.write("!! Issue with WKT for {place}: {exc}\n".format(place=subject,
+                                                                                         exc=e))
+                    processed.append(subject)
             # fallback on latitude / longitude
             elif (subject, Geo.lat, None) in graph and (subject, Geo.long, None) in graph:
                 lat = graph.value(subject, Geo.lat).toPython()
