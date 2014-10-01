@@ -7,14 +7,32 @@
       text-face-name: @font;
       text-name: @value;
       text-fill: @oxfordBlue;
-      text-size: 16;
+      text-size: 15;
       text-halo-fill: fadeout(white, 40%);
-      text-halo-radius: 1.5;
+      text-halo-radius: 1.75;
       text-min-distance: 5;
       text-placement-type: simple;  	// Re-position and/or re-size text to avoid overlaps
       text-placements: "N,S,E,W,NE,SE,NW,SW,16,14,12";
       text-allow-overlap: true;
       text-wrap-width: 25;
+    }
+  }
+  // hiding Keble Triangle up to zoom 14 as it is too close from ROQ
+  [name='Keble Triangle'][zoom<=14] {
+  	::labels {
+      text-face-name: @font;
+      text-name: @value;
+      text-fill: @oxfordBlue;
+      text-opacity: 0;
+    }
+  }
+  // hiding ROQ up to zoom 13 as it is too close from the Science Area
+  [name='Radcliffe Observatory Quarter'][zoom<=13] {
+  	::labels {
+      text-face-name: @font;
+      text-name: @value;
+      text-fill: @oxfordBlue;
+      text-opacity: 0;
     }
   }
 }
