@@ -134,17 +134,25 @@
         "geometry_field": "geometry",
         "id": "landuse",
         "key_field": "",
-        "project": "osm-bright-imposm",
+        "project": "maps-ox",
         "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
         "table": "( SELECT geometry, type, area\n  FROM osm_landusages\n  ORDER BY area DESC\n) AS data",
-        "type": "postgis"
+        "type": "postgis",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "polygon",
       "id": "landuse",
       "name": "landuse",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "Datasource": {
@@ -314,15 +322,23 @@
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
-        "table": "( SELECT geometry, type, 0 as bridge, access, render, layer, tunnel,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM osm_roads WHERE tunnel = 1\n    UNION ALL\n    SELECT *, '2_line' AS render FROM osm_roads WHERE tunnel = 1\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM osm_roads WHERE tunnel = 1\n  ) AS tunnels\n  ORDER BY layer ASC, render ASC\n) AS data",
-        "type": "postgis"
+        "table": "( SELECT geometry, name, type, 0 as bridge, access, render, layer, tunnel,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM osm_roads WHERE tunnel = 1\n    UNION ALL\n    SELECT *, '2_line' AS render FROM osm_roads WHERE tunnel = 1\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM osm_roads WHERE tunnel = 1\n  ) AS tunnels\n  ORDER BY layer ASC, render ASC\n) AS data",
+        "type": "postgis",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "linestring",
       "id": "tunnel",
       "name": "tunnel",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "Datasource": {
@@ -349,15 +365,23 @@
         "key_field": "",
         "project": "osm-bright",
         "srs": null,
-        "table": "( SELECT geometry, type, tunnel, bridge, access, 'fill' AS render,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM osm_roads\n  WHERE bridge = 0\n    AND tunnel = 0\n  ORDER BY z_order\n) AS data",
-        "type": "postgis"
+        "table": "( SELECT geometry, name, type, tunnel, bridge, access, 'fill' AS render,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM osm_roads\n  WHERE bridge = 0\n    AND tunnel = 0\n  ORDER BY z_order\n) AS data",
+        "type": "postgis",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "linestring",
       "id": "roads_high",
       "name": "roads_high",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "Datasource": {
@@ -366,14 +390,22 @@
         "geometry_field": "",
         "key_field": "",
         "table": "( SELECT geometry, type\n  FROM osm_roads_gen1\n  WHERE type IN ('motorway', 'trunk', 'primary', 'secondary', 'motorway_link', 'trunk_link')\n) AS data",
-        "type": "postgis"
+        "type": "postgis",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "linestring",
       "id": "roads_med",
       "name": "roads_med",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "Datasource": {
@@ -416,15 +448,23 @@
         "key_field": "",
         "project": "osm-bright-imposm",
         "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-        "table": "( SELECT geometry, type, bridge, access, render, layer, 0 as tunnel,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM osm_roads WHERE bridge = 1\n    UNION ALL\n    SELECT *, '2_line' AS render FROM osm_roads WHERE bridge = 1\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM osm_roads WHERE bridge = 1\n  ) as bridges\n  ORDER BY layer ASC, render ASC\n) AS data",
-        "type": "postgis"
+        "table": "( SELECT geometry, name, type, bridge, access, render, layer, 0 as tunnel,\n  CASE\n    WHEN type IN ('motorway', 'trunk') THEN 'motorway'\n    WHEN type IN ('primary', 'secondary') THEN 'mainroad'\n    WHEN type IN ('motorway_link', 'trunk_link', 'primary_link', 'secondary_link', 'tertiary', 'tertiary_link', 'residential', 'unclassified', 'road', 'living_street') THEN 'minorroad'\n    WHEN type IN ('service', 'track') THEN 'service'\n    WHEN type IN ('path', 'cycleway', 'footway', 'pedestrian', 'steps', 'bridleway') THEN 'noauto'\n    WHEN type IN ('light_rail', 'subway', 'narrow_gauge', 'rail', 'tram') THEN 'railway'\n    ELSE 'other' END AS stylegroup\n  FROM (\n    SELECT *, '1_outline' AS render FROM osm_roads WHERE bridge = 1\n    UNION ALL\n    SELECT *, '2_line' AS render FROM osm_roads WHERE bridge = 1\n    UNION ALL\n    SELECT *, '3_inline' AS render FROM osm_roads WHERE bridge = 1\n  ) as bridges\n  ORDER BY layer ASC, render ASC\n) AS data",
+        "type": "postgis",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "linestring",
       "id": "bridge",
       "name": "bridge",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "Datasource": {
@@ -471,14 +511,22 @@
         "type": "postgis",
         "id": "buildings",
         "project": "maps-ox",
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "extent_cache": "auto"
       },
       "class": "",
       "geometry": "polygon",
       "id": "buildings",
       "name": "buildings",
       "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913"
+      "srs-name": "900913",
+      "extent": [
+        -179.9999999749438,
+        -85.051,
+        179.9999999749438,
+        85.051
+      ],
+      "advanced": {}
     },
     {
       "geometry": "polygon",
@@ -645,46 +693,6 @@
         "dbname": "osm",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
-        "id": "mainroad_label",
-        "key_field": "",
-        "project": "osm-bright",
-        "srs": null,
-        "table": "( SELECT geometry, type, name, oneway\n  FROM osm_mainroads\n  WHERE name IS NOT NULL OR oneway <> 0\n) AS data",
-        "type": "postgis"
-      },
-      "class": "",
-      "geometry": "linestring",
-      "id": "mainroad_label",
-      "name": "mainroad_label",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
-    },
-    {
-      "Datasource": {
-        "dbname": "osm",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "geometry_field": "geometry",
-        "id": "minorroad_label",
-        "key_field": "",
-        "project": "foss4g-2011",
-        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-        "table": "( SELECT geometry, type, name, oneway\n  FROM osm_minorroads\n  WHERE name IS NOT NULL OR oneway <> 0\n) AS data",
-        "type": "postgis"
-      },
-      "class": "",
-      "geometry": "linestring",
-      "id": "minorroad_label",
-      "name": "minorroad_label",
-      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
-      "srs-name": "900913",
-      "status": "on"
-    },
-    {
-      "Datasource": {
-        "dbname": "osm",
-        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
-        "geometry_field": "geometry",
         "id": "waterway_label",
         "key_field": "",
         "project": "foss4g-2011",
@@ -780,6 +788,46 @@
       "srs": "",
       "advanced": {},
       "name": "colleges-buildings-labels"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "geometry",
+        "id": "mainroad_label",
+        "key_field": "",
+        "project": "maps-ox",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT geometry, type, name, oneway\n  FROM osm_mainroads\n  WHERE name IS NOT NULL OR oneway <> 0\n) AS data",
+        "type": "postgis"
+      },
+      "class": "",
+      "geometry": "linestring",
+      "id": "mainroad_label",
+      "name": "mainroad_label",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913",
+      "status": "on"
+    },
+    {
+      "Datasource": {
+        "dbname": "osm",
+        "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
+        "geometry_field": "geometry",
+        "id": "minorroad_label",
+        "key_field": "",
+        "project": "maps-ox",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+        "table": "( SELECT geometry, type, name, oneway\n  FROM osm_minorroads\n  WHERE name IS NOT NULL OR oneway <> 0\n) AS data",
+        "type": "postgis"
+      },
+      "class": "",
+      "geometry": "linestring",
+      "id": "minorroad_label",
+      "name": "minorroad_label",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "srs-name": "900913",
+      "status": "on"
     }
   ],
   "scale": 1,

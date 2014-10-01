@@ -171,6 +171,9 @@ come in as well.
     [stylegroup='noauto']   { line-width: @rdz18_min / 4 + 6; }
     [stylegroup='railway']  { line-width: 4 + 6; }
   }
+  [name="Gladstone Link"] {
+    line-opacity: 0;
+  }
 }
 
 
@@ -319,6 +322,9 @@ come in as well.
   [zoom>=18] {
     [stylegroup='noauto']   { line-width: @rdz18_min / 4 + 3; }
     [stylegroup='railway']  { line-width: 4 + 3; }
+  }
+  [name="Gladstone Link"] {
+    line-opacity: 0;
   }
 }
 

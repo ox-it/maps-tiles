@@ -432,6 +432,9 @@
   text-halo-radius:1;
   text-min-distance:60;
   text-size:11;
+  [name="Gladstone Link"] {
+   text-opacity: 0;
+  }
 }
 
 /* ================================================================== */

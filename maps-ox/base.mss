@@ -73,6 +73,10 @@
     building-fill:@collegeBuilding;
     line-color:@collegeBuildingOutline;
   }
+  [name="Gladstone Link"] {
+    building-fill-opacity: 0;
+    line-opacity:0;
+  }
 }
 
 /* ================================================================== */
