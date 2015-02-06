@@ -42,13 +42,11 @@ Also run the following **Fabric** command to "attach" your user to PostGIS:
 
 You need **Fabric** to run commands on the server (using a virtualenv, it is recommended to `pip install -r requirements.txt`).
 
-First, download the latest dump from OpenStreetMap for Oxfordshire:
+Run the following command to download the latest dump from OpenStreetMap and populate PostGIS with it:
 
-    fab server download_osm_oxf
+    fab server upgrade_osm
 
-Then you should populate the PostGIS database with the dump:
-
-    fab server populate_osm
+See `fabfile.py` for more information.
 
 ## Workflow for working with Tilemill and git
 
