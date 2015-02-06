@@ -61,6 +61,16 @@ Using SSH, navigate to `/srv/tilemill/maps-tiles` to navigate to the git reposit
 You will notice fairly quickly that you will need to enter your username/password quite often when doing `git push` and `git pull`, that is because
 we are using HTTPS, various techniques exist to reduce this issue: https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github
 
+## Exporting tiles from TileMill
+
+Use the web interface to export in `MBTiles` format. Default parameters are fine.
+
+Once the export is done ("process exited"...), go to `/usr/share/mapbox/export` and
+`scp` the most recent `maps-ox.mbtiles` file (which can be suffixed with a random string
+if there are multiple exports) to your machine. For example:
+
+    scp myusername@tilemill.mydomain:/usr/share/mapbox/export/maps-ox.mbtiles .
+
 ## Deploying tiles
 
 Deploying the tiles to a server is done by running the **Fabric** command:
