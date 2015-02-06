@@ -58,14 +58,17 @@ def init():
     sudo('psql {db} -c "GRANT ALL ON geography_columns TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
     sudo('psql {db} -c "GRANT ALL ON geometry_columns TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
     sudo('psql -c "GRANT ALL ON DATABASE {db} TO {user};"'.format(user=env.user, db=env.osm_db), user='postgres', warn_only=True)
-     
-     
+
+
 # commands
 
 @task
 def download_osm_oxf():
     """Download latest OpenStreetMap dump for Oxfordshire
     """
+    # first remove the old dump -- causes permission issues if the file has been created
+    # by another user
+    run('rm -f {tilemill_home}/{osm_file}'.format(tilemill_home=env.tilemill_home, osm_file=env.osm_file))
     run('curl "{osm_download}" > {tilemill_home}/{osm_file}'.format(osm_download=OSM_DOWNLOAD,
                                                                       tilemill_home=env.tilemill_home,
                                                                       osm_file=env.osm_file))
@@ -74,9 +77,23 @@ def download_osm_oxf():
 def populate_osm():
     """Run importer from OSM file
     """
+    # we need to temporarily change the owner of tables to the user running the
+    # importer (mapbox is the user running TileMill)
+    # TODO this is an ugly tradeoff and should probably be improved...
+    sudo('psql {db} -c "REASSIGN OWNED BY mapbox TO {user};"'.format(db=env.osm_db, user=env.user), user='postgres')
     run('imposm -m {tilemill_home}/imposm-mapping.py --connection postgis:///{db} --read --write --optimize --deploy-production-tables --overwrite-cache {tilemill_home}/{osm_file}'.format(db=env.osm_db,
                                                                                                                         tilemill_home=env.tilemill_home,
                                                                                                                         osm_file=env.osm_file))
+    sudo('psql {db} -c "REASSIGN OWNED BY {user} TO mapbox;"'.format(db=env.osm_db, user=env.user), user='postgres')
+
+
+@task
+def upgrade_osm():
+    """Download latest dump and push it to PostGis
+    """
+    download_osm_oxf()
+    populate_osm()
+
 
 @task
 def tilemill_to_git():
@@ -90,7 +107,7 @@ def git_to_tilemill():
     """Copy files from the git repo to tilemill
     """
     run('cp -R /srv/tilemill/maps-tiles/maps-ox/ /usr/share/mapbox/project/')
-    
+
 
 # tiles
 
