@@ -1,9 +1,11 @@
 # Maps-Tiles
 
 This repository contains:
- * the source files for maps
- * puppet files to provision a VM exposing TileMill
- * Vagrantfile to start a local VM
+
+ * `maps-ox/`: source files for map tiles (i.e. stylesheets)
+ * `data/`: GeoJSON files containing transformed OxPoints data
+ * `puppet/`: puppet files to provision a VM exposing TileMill
+ * `Vagrantfile` to start a local VM using Vagrant
 
 ## Vagrant VM
 
@@ -15,38 +17,57 @@ You should run `fab vm init` the first time to setup some permissions on filesty
 
 TileMill UI is served on port 80, tiles are served on port 8080.
 
-To run Fabric commands you need to set up two environment variables: `MAPS_HOST` (hostname of the server to SSH) and `MAPS_USER` (your user name on the server).
+To run **Fabric** commands you need to set up two environment variables:
+
+* `MAPS_HOST` (hostname of the server to SSH)
+* `MAPS_USER` (your user name on the server).
+
+Use the following syntax to set an environment variable:
+
+    export NAME=VALUE
 
 ## Authentication for TileMill web interface
 
-user // pass
+It is using HTTP Basic Auth, default username/password are: `user` / `pass`.
 
-## Update commands
+## Initial setup for a new user
 
-You need `fabric` to run commands on the server (using a virtualenv, it is recommended to `pip install -r requirements.txt`).
+Once logged-in to the server, you should add your `.gitconfig` to the root of your user directory.
 
-You should run:
- * `fab server download_osm_oxf` to download the latest dump from OpenStreetMap for Oxfordshire
- * `fab server populate_osm` to feed PostGIS with the latest dump from OpenStreetMap
+Also run the following **Fabric** command to "attach" your user to PostGIS:
 
-## Initial setup for an user
+    fab server init
 
-Once logged-in to the server, you should add your .gitconfig to the root of your user directory.
+## Update OpenStreetMap data
 
-## Workflow for working with
+You need **Fabric** to run commands on the server (using a virtualenv, it is recommended to `pip install -r requirements.txt`).
 
-After having done some changes, you should run `fab server tilemill_to_git` to copy the project files from the workspace (TileMill) to the git repository.
+First, download the latest dump from OpenStreetMap for Oxfordshire:
 
-Using SSH, do `cd /srv/tilemill/maps-tiles` to navigate to the git repository; you can now use all the git commands (i.e. `commit`, `branch` etc)
+    fab server download_osm_oxf
 
-## Note on git / github using HTTPS
+Then you should populate the PostGIS database with the dump:
+
+    fab server populate_osm
+
+## Workflow for working with Tilemill and git
+
+After having done some changes, you should run the following command to copy the project files from the workspace (TileMill) to the git repository:
+
+    fab server tilemill_to_git
+
+Using SSH, navigate to `/srv/tilemill/maps-tiles` to navigate to the git repository; you can now use all the git commands (i.e. `commit`, `branch` etc)
+
+### Using git / GitHub with HTTPS
 
 You will notice fairly quickly that you will need to enter your username/password quite often when doing `git push` and `git pull`, that is because
 we are using HTTPS, various techniques exist to reduce this issue: https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-github
 
 ## Deploying tiles
 
-Deploying the tiles to a server is done by running: `fab tiles deploy_tiles:/local/path/to.mbtiles`
+Deploying the tiles to a server is done by running the **Fabric** command:
+
+    fab tiles deploy_tiles:/local/path/to.mbtiles
 
 It expects en environment variable `TILES_HOST` containing `host:port`, your public SSH key should have been deployed to `/srv/tiles/.ssh/authorized_keys` first.
 
