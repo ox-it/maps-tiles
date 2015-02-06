@@ -48,8 +48,12 @@ def _get_type(graph, subjects, type_name, ignore=None):
             title = graph.value(subject, DC.title)
             short_name = graph.value(subject, OxPoints.shortLabel)
             map_label = graph.value(subject, OxPoints.mapLabel)
-            # name is the map label defined but fallbacks on short name or title
-            name = map_label or short_name or title
+            if type_name == 'College':
+                # Colleges should always use the main title, not short name
+                name = title
+            else:
+                # name is the map label defined but fallbacks on short name or title
+                name = map_label or short_name or title
             shape = graph.value(subject, Geometry.extent)
             if shape:
                 wkt = graph.value(shape, Geometry.asWKT)
