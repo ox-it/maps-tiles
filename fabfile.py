@@ -88,7 +88,7 @@ def populate_osm():
 
 
 @task
-def upgrade_osm():
+def update_osm():
     """Download latest dump and push it to PostGis
     """
     download_osm_oxf()

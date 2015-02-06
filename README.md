@@ -44,7 +44,7 @@ You need **Fabric** to run commands on the server (using a virtualenv, it is rec
 
 Run the following command to download the latest dump from OpenStreetMap and populate PostGIS with it:
 
-    fab server upgrade_osm
+    fab server update_osm
 
 **Important note**: the script will ask for your password, and it is expected that you have `sudo` access to the machine. See `fabfile.py` for more information.
 
