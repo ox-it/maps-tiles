@@ -46,7 +46,7 @@ Run the following command to download the latest dump from OpenStreetMap and pop
 
     fab server upgrade_osm
 
-See `fabfile.py` for more information.
+**Important note**: the script will ask for your password, and it is expected that you have `sudo` access to the machine. See `fabfile.py` for more information.
 
 ## Workflow for working with Tilemill and git
 
