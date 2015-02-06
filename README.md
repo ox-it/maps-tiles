@@ -48,6 +48,14 @@ Run the following command to download the latest dump from OpenStreetMap and pop
 
 **Important note**: the script will ask for your password, and it is expected that you have `sudo` access to the machine. See `fabfile.py` for more information.
 
+## Update OxPoints data
+
+Follow the process in the directory `data/` and make sure that you commit and push
+the updated GeoJSON files.
+
+SSH into the Tilemill server and go to the git repository at `/srv/tilemill/maps-tiles`,
+make sure you are on the correct branch and fetch the latest changes (`git pull`).
+
 ## Workflow for working with Tilemill and git
 
 After having done some changes, you should run the following command to copy the project files from the workspace (TileMill) to the git repository:
