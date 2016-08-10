@@ -4,7 +4,7 @@ services:
     tilemill:
         build: .
         links:
-            - db
+            - pg
         volumes:
             - ./data:/srv/tilemill/maps-tiles/data
             - ./maps-ox:/root/Documents/MapBox/project/mapsox
@@ -13,7 +13,9 @@ services:
             - "20009:20009"
             - "20008:20008"
             - "1100:22"
-    db:
-        image: kartoza/postgis
+    pg:
+        build:
+            context: .
+            dockerfile: Dockerfile_postgis
         ports: 
             - "5432:5432"

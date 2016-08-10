@@ -25,7 +25,11 @@
   "Layer": [
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34 -20037508.34 20037508.34 20037508.34",
         "file": "/srv/tilemill/mapbox/10m-land.zip",
         "id": "land",
@@ -94,7 +98,11 @@
       "id": "landuse_gen0",
       "class": "",
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "landuse_gen0",
@@ -110,7 +118,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "landuse_gen1",
@@ -129,7 +141,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "landuse",
@@ -156,7 +172,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "waterway",
@@ -175,7 +195,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -191,7 +215,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -207,7 +235,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "water_gen0",
@@ -226,7 +258,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "water_gen1",
@@ -245,7 +281,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "water",
@@ -264,7 +304,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "landuse_overlays",
@@ -281,7 +325,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "",
         "id": "admin",
@@ -299,7 +347,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "aeroway",
@@ -318,7 +370,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -342,7 +398,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -358,7 +418,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "",
         "id": "roads_high",
@@ -385,7 +449,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "",
         "key_field": "",
@@ -409,7 +477,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -425,7 +497,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -441,7 +517,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "bridge",
@@ -468,7 +548,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -484,7 +568,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "barrier_lines",
@@ -503,7 +591,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "key_field": "",
@@ -630,7 +722,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "place",
@@ -650,7 +746,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "area_label",
@@ -670,7 +770,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "motorway_label",
@@ -690,7 +794,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "waterway_label",
@@ -791,7 +899,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "mainroad_label",
@@ -811,7 +923,11 @@
     },
     {
       "Datasource": {
-        "dbname": "osm",
+        "dbname": "gis",
+        "host": "pg",
+        "port": "5432",
+        "user": "docker",
+        "password": "docker",
         "extent": "-20037508.34,-20037508.34,20037508.34,20037508.34",
         "geometry_field": "geometry",
         "id": "minorroad_label",
