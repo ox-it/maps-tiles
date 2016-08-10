@@ -3,3 +3,5 @@
 maps-ox/layers/*
 maps-ox/.thumb.png
 
+# don't add mapbox assets
+mapbox_assets/*

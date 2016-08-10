@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    tilemill:
+        build: .
+        links:
+            - db
+        volumes:
+            - ./data:/srv/tilemill/maps-tiles/data
+            - ./maps-ox:/root/Documents/MapBox/project/mapsox
+            - ./mapbox_assets:/srv/tilemill/mapbox
+        ports:
+            - "20009:20009"
+            - "20008:20008"
+            - "1100:22"
+    db:
+        image: kartoza/postgis
+        ports: 
+            - "5432:5432"
