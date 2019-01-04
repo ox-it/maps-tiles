@@ -9,16 +9,15 @@ This repository contains:
 
 ## Export with standalone maps app
 As of August 2016, the tilemill server wasn't operational and attempts to restore it haven't been successful.
-Instead, the following method can be used to generate the map tiles
+Instead, the following method can be used to generate the map tiles manually on a local machine (OSX/Ubuntu).
 
-1. Install tilemill
-Default install doesn't work. Instead see the note here https://github.com/mapbox/tilemill/issues/2550
-2. Copy the maps-ox folder to ~/Documents/MapBox/project
-3. Copy the data folder to /srv/tilemill/maps-tiles
-4. Download the following .zip files and copy to /srv/tilemill/mapbox:
+1. Install tilemill: https://github.com/tilemill-project/tilemill
+2. Copy the maps-ox folder from the root of this repository to ~/Documents/MapBox/project. Tilemill will then recognise it as a project.
+3. Download the following .zip files:
     - http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip
     - http://tilemill-data.s3.amazonaws.com/osm/coastline-good.zip
     - http://tilemill-data.s3.amazonaws.com/osm/shoreline_300.zip
+4. These zip files are among several Datasources in maps-ox/project.mml, which defines the tilemill project. You will need to edit the filepaths in these datasources to point correctly to the zip files (note: somewhere the user you run tilemill as can access).
 5. Run Docker container for postgis database
 ```
 docker-compose up
@@ -28,7 +27,7 @@ docker-compose up
 docker exec -it mapstiles_pg_1 /bin/bash /srv/fetch_osm.sh
 ```
 Enter password 'docker' when prompted
-7. Modify project.mml to amend connection details for each Datasource as follows:
+7. Modify project.mml to amend connection details for each gis Datasource as follows. If "docker-default" doesn't work as a host value then use the IP address of the docker container mapstiles_pg_1.
 ```
     "dbname": "gis",
     "host": "docker-default",
@@ -37,9 +36,8 @@ Enter password 'docker' when prompted
     "password": "docker",
 ```
 8. Open project in tilemill
-9. Add all .mss stylesheets from maps-ox. This only seems to be possible by manually creating them and then pasting the contents of the files.
-10. If necessary amend pg_hba.conf to allow incoming connections from tilemill. The docker container output will show an error if this is needed.
-11. At this point the map should show up with appropriate appearance and labels etc. The tiles can be exported according to the instructions below.
+9. If necessary amend pg_hba.conf to allow incoming connections from tilemill. The docker container output will show an error if this is needed.
+10. At this point the map should show up with appropriate appearance and labels etc. The tiles can be exported according to the instructions below.
 
 ## Vagrant VM
 
