@@ -18,7 +18,7 @@ Instead, the following method can be used to generate the map tiles manually on 
     - http://tilemill-data.s3.amazonaws.com/osm/coastline-good.zip
     - http://tilemill-data.s3.amazonaws.com/osm/shoreline_300.zip
 4. These zip files are among several Datasources in maps-ox/project.mml, which defines the tilemill project. You will need to edit the filepaths in these datasources to point correctly to the zip files (note: somewhere the user you run tilemill as can access).
-5. Run Docker container for postgis database
+5. Run Docker container for postgis database from the root of this project
 ```
 docker-compose up
 ```
