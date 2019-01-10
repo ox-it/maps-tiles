@@ -6,5 +6,5 @@ ADD puppet/modules/openstreetmap/templates/imposm-mapping.py /srv/imposm-mapping
 ADD fetch_osm.sh /srv/fetch_osm.sh
 
 RUN apt-get update && apt-get install curl nano -y && \
-apt-get install python-pip libpq-dev build-essential python-dev protobuf-compiler libprotobuf-dev libtokyocabinet-dev python-psycopg2 libgeos-c1 -y && \
+apt-get install python-pip libpq-dev build-essential python-dev protobuf-compiler libprotobuf-dev libtokyocabinet-dev python-psycopg2 libgeos-c1v5 -y && \
 pip install imposm
