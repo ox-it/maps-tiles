@@ -28,7 +28,7 @@ docker exec -it mapstiles_pg_1 /bin/bash /srv/fetch_osm.sh
 ```
 Enter password 'docker' when prompted
 
-7. Modify project.mml to amend connection details for each gis Datasource as follows. If "docker-default" doesn't work as a host value then use the IP address of the docker container mapstiles_pg_1.
+7. Modify project.mml to amend connection details for each gis Datasource as follows. If "docker-default" doesn't work as a host value then use the IP address of the docker container mapstiles_pg_1 (or localhost on a Mac).
 ```
     "dbname": "gis",
     "host": "docker-default",
