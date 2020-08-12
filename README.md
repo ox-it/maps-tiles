@@ -120,6 +120,13 @@ Deploying the tiles to a server is done by running the **Fabric** command:
 
 It expects en environment variable `TILES_HOST` containing `host:port`, your public SSH key should have been deployed to `/srv/tiles/.ssh/authorized_keys` first.
 
+It can be easier to do this process manually now with the following steps:
+    `scp ./local-tiles.mbtiles tiles@maps-tiles.oucs.ox.ac.uk:/srv/tiles/tiles.mbtiles`
+    `ssh mapstiles@129.67.241.175`
+    `mb-util /srv/tiles/tiles.mbtiles /srv/tiles/tiles-YYYYMMHHMM`
+    `rm -f /srv/tiles/www`
+    `ln -s /srv/tiles/tiles-YYYYMMHHMM /srv/tiles/www`
+
 ## Similar projects
 
 Here's a list of similar projects to run TileMill on a server:
